@@ -1,0 +1,109 @@
+== README
+
+
+Users - auto create a user
+Login with GitHub or anonymous
+
+
+Base class 
+FileNode
+Directories
+Files - either text or binary based
+Text Files
+
+
+Commands
+
+
+Drop images 
+
+// page 100%,500px
+// library "d3"
+// require "something.css"
+// require "tester.js"
+// require "something.js"
+
+
+- Drag and drop files up
+- simple REST api:
+
+?apikey=keyname
+
+POST or PUT to /home/username/directory/something.txt
+GET /home/username/directory - user's home directory has to be secret
+DELETE /home/username
+
+PUT /commands/mv argv[] argv[] argv[] - returns status + JSON
+
+// Access to a DB
+POST /db/username/somthing
+GET /db/username/something
+
+
+
+CLI - Backbone models, some client only based cones (clear), some server based (mv, ls)
+These translate to commands that just hit /commands/ with a session-based API key
+
+====
+
+help
+libraries
+js - execute javascript on the command line in it's own ENV
+ls
+cd
+mv 
+cp
+edit - codemirror with regular binding
+vi - codemirror with vi keybindings
+style
+run
+public - make a directory public
+private - make a directory private (not listable, but files are viewable online, default)
+secret - make a directory only accessible via an API key
+vsplit - split into two console, left and right
+hsplit - split into two consoles, top and bottom
+close - close this console 
+source - source a JS file into ECMAsh
+echo - same as echo
+clear - clear screen
+refresh / clear env - clear the environment
+quit - quit the shell
+zoom - zoom in
+unzoom - zoom out
+apikey - return my api key (apikey create|expire)
+
+eventually, git, ftp, apis, etc
+
+
+tutorial - start a tutorial
+
+.ecmarc - file that will run ECMAsh commands when you login
+- checkbox to 
+
+
+Pipes?
+REST endpoint? 
+
+var Command = Backbone.Model.extend({
+
+});
+
+
+var History // list of commands, some which have been executed
+
+
+var Result // result of a command - 
+
+var InteractiveResult // iframe interactive result of something
+
+var Editor //  
+
+
+
+// user can create own client side commands
+ECMAsh.addCommand(ClientCommand.extend({ 
+
+});
+
+
+
