@@ -6,7 +6,7 @@ class Node < ActiveRecord::Base
 
   def directory?; false; end
 
-  validates :name, format: { with:  /\A[a-zA-Z\-_0-9]+\z/ }
+  validates :name, format: { with:  /\A[a-zA-Z\-._0-9]+\z/ }
 
   protected
 

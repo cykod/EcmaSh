@@ -19,6 +19,11 @@ module EcmaSh
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    if Rails.env.test?
+      config.paperclip_defaults = {
+        :path => "public/assets/:class/:attachment/:style/:id/:filename"
+      }
+    else
       config.paperclip_defaults = {
       :storage => :s3,
       :s3_credentials => {
@@ -28,5 +33,6 @@ module EcmaSh
       }
     }
 
+    end
   end
 end

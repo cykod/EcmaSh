@@ -3,7 +3,7 @@ class CreateNodes < ActiveRecord::Migration
     create_table :nodes do |t|
       t.string :name
       t.attachment :file
-      t.string :mimetype
+      t.string :file_type
       t.text :fullpath, limit: 512
       t.integer :parent_id
       t.string :type

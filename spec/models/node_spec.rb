@@ -27,7 +27,7 @@ describe Node do
     end
 
     it "does allow numbers and dashes" do
-      node = build :directory_node, name: "tester1235-4352"
+      node = build :directory_node, name: "tester1235-4352.test"
       node.should have(0).errors_on(:name)
     end
   end

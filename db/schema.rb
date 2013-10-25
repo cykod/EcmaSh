@@ -22,13 +22,14 @@ ActiveRecord::Schema.define(version: 20131020011145) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.string   "extension"
-    t.string   "mimetype"
+    t.string   "file_type"
     t.text     "fullpath"
     t.integer  "parent_id"
     t.string   "type"
     t.integer  "user_id"
     t.integer  "lock_level",        limit: 2, default: 1
+    t.integer  "width",             limit: 2
+    t.integer  "height",            limit: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

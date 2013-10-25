@@ -5,7 +5,7 @@ gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
-gem 'aws-s3'
+gem 'aws-sdk'
 gem 'paperclip'
 gem "devise"
 gem "dotenv"
