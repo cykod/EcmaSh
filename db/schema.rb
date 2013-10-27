@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131020011145) do
+ActiveRecord::Schema.define(version: 20131025133048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "file_node_contents", force: true do |t|
+    t.string   "content"
+    t.integer  "file_node_id"
+    t.string   "content_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "nodes", force: true do |t|
     t.string   "name"
@@ -25,6 +33,7 @@ ActiveRecord::Schema.define(version: 20131020011145) do
     t.string   "file_type"
     t.text     "fullpath"
     t.integer  "parent_id"
+    t.integer  "parent_ids",                              array: true
     t.string   "type"
     t.integer  "user_id"
     t.integer  "lock_level",        limit: 2, default: 1

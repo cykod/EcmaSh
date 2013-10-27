@@ -31,4 +31,26 @@ describe Node do
       node.should have(0).errors_on(:name)
     end
   end
+
+  context "#parent_ids" do
+
+    let(:dir1) { create :directory_node }
+    let(:dir2) { create :directory_node, parent: dir1 }
+    let(:dir3) { create :directory_node, parent: dir2 }
+    let(:file) { create :file_node, parent: dir3 }
+
+
+    let(:dir_other) { create :directory_node }
+    
+
+    it "sets the full hierarchy of parent ids" do
+      file.parent_ids.should == [ dir1.id, dir2.id, dir3.id ]
+    end
+
+    it "updates parent_ids if a directory is moved" do
+      dir2.parent = dir_other
+      dir2.save
+      file.parent_ids.should == [ dir_other.id, dir2.id, dir3.id ]
+    end
+  end
 end

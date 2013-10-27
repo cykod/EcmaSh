@@ -6,6 +6,7 @@ class CreateNodes < ActiveRecord::Migration
       t.string :file_type
       t.text :fullpath, limit: 512
       t.integer :parent_id
+      t.integer :parent_ids, array: true
       t.string :type
       t.integer :user_id
       t.integer :lock_level, limit: 2, default: 1
