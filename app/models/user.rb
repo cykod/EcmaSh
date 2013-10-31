@@ -7,4 +7,12 @@ class User < ActiveRecord::Base
   def access(node)
     Access.new(self,node)
   end
+
+  def can_read?(node)
+    access(node).read?
+  end
+
+  def can_write?(node)
+    access(node).write?
+  end
 end

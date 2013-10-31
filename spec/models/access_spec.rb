@@ -20,7 +20,7 @@ describe Access do
   describe "#read?" do
 
     it "should give a user read access to a node they own" do
-      user.access(own_file_node).read?.should be_true
+      user.can_read?(own_file_node).should be_true
     end
 
     it "should give read access to a directory they own" do
@@ -44,7 +44,7 @@ describe Access do
   describe "#write?" do
 
     it "should give user write access to it's own node" do
-      user.access(own_file_node).write?.should be_true
+      user.can_write?(own_file_node).should be_true
     end
 
     it "should give user write access to it's own directory" do

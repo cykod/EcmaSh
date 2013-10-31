@@ -33,7 +33,7 @@ POST or PUT to /home/username/directory/something.txt
 GET /home/username/directory - user's home directory has to be secret
 DELETE /home/username
 
-PUT /commands/mv argv[] argv[] argv[] - returns status + JSON
+POST /commands/mv argv[] argv[] argv[] - returns status + JSON
 
 // Access to a DB
 POST /db/username/somthing

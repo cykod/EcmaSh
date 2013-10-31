@@ -53,4 +53,15 @@ describe Node do
       file.parent_ids.should == [ dir_other.id, dir2.id, dir3.id ]
     end
   end
+
+  describe".fetch" do
+    let(:dir1) { create :directory_node }
+    let(:dir2) { create :directory_node, parent: dir1 }
+    let(:dir3) { create :directory_node, parent: dir2 }
+    
+    it "returns the node" do
+      dir3.should == Node.fetch(dir3.fullpath)
+    end
+
+  end
 end

@@ -14,6 +14,10 @@ class Node < ActiveRecord::Base
   PRIVATE = 2  # anyone can view files in directory
   SECRET = 3   # only user can read
 
+  def self.fetch(fullpath)
+    Node.where(fullpath: fullpath).first
+  end
+
 
   protected
 
