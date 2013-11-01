@@ -50,6 +50,7 @@ help
 libraries
 js - execute javascript on the command line in it's own ENV
 ls
+mkdir
 cd
 mv 
 cp

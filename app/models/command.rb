@@ -14,7 +14,6 @@ class Command < ActiveRecord::Base
     $1.present? ? $1.to_sym : nil
   end.compact
 
-
   def self.valid_command?(command)
     @@commands.include?(command.to_sym)
   end
