@@ -8,7 +8,7 @@ class CommandsController < ApplicationController
       render json: { error: result.to_s }, status: 406
 
     else
-      render json: result
+      render json: { result: result }
     end
   end
     
@@ -16,7 +16,7 @@ class CommandsController < ApplicationController
   protected
 
   def command_params
-    params.permit(:id, argv: [], context: {})
+    params.permit(:id, argv: [])
   end
 
   def command_id
@@ -28,7 +28,9 @@ class CommandsController < ApplicationController
   end
 
   def context_args
-    command_params[:context] || {}
+    output = {}
+    (params[:context] || {}).each {|key,val| output[key.to_s] = val.to_s }
+    output
   end
 
 end

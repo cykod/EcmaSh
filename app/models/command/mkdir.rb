@@ -11,6 +11,6 @@ class Command::Mkdir < ::Command
 
     raise InvalidValidationError.new(dirnode.errors) unless dirnode.valid?
 
-    output!(NodeJSON.new(node).list_hash)
+    output!(NodeJSON.new(dirnode).list_hash)
   end
 end

@@ -12,4 +12,4 @@
 //= require lodash
 //= require zepto
 //= require backbone
-//= require_tree .
+//= require_tree ./models

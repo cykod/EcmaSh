@@ -12,4 +12,6 @@ EcmaSh::Application.routes.draw do
   
   #get "/home/*filepath"
   #get "/bin/*filepath"
+
+  root to: "shells#new"
 end
