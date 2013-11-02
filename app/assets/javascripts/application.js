@@ -9,7 +9,10 @@
 //
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
-//= require lodash
-//= require zepto
-//= require backbone
+//= require lib/lodash
+//= require lib/zepto
+//= require lib/backbone
+//= require base
+//= require_tree ./include
 //= require_tree ./models
+//= require_tree ./views
