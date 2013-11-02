@@ -5,8 +5,9 @@ class ApplicationController < ActionController::Base
 
 
   def require_user
-    if !current_user?
-      
+    if !current_user
+      render nothing: true, status: 403
+      return false
     end
   end
 end

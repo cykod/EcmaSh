@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
 
+  has_many :commands
+
   def access(node)
     Access.new(self,node)
   end

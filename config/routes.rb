@@ -4,7 +4,7 @@ EcmaSh::Application.routes.draw do
   #get "/commands" - history
   #get "/commands/:id" - history
   #put "/commands/:id_num" - run historical command
-  #post "/commands/:id" - create
+  post "/commands/:id" => "commands#create"
   
   #get "/man"
   #get "/man/:id"

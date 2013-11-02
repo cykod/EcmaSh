@@ -5,8 +5,8 @@ describe Command::Ls do
   let(:user) { create :user }
   let(:other_user) { create :other_user }
 
-  def run_ls_command(*args)
-    Command.run(user,:ls,*args)
+  def run_ls_command(arg)
+    Command.run(user,:ls,{},[ arg ])
   end
 
   describe "#run" do

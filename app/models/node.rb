@@ -29,7 +29,7 @@ class Node < ActiveRecord::Base
 
   def set_parent_ids
     if self.parent
-      self.parent_ids = self.parent.parent_ids + [ self.parent_id ]
+      self.parent_ids = (self.parent.parent_ids||[]) + [ self.parent_id ]
     else
       self.parent_ids = []
     end
