@@ -35,7 +35,7 @@ class Command < ActiveRecord::Base
                             context: (context || {}).stringify_keys,
                             type: command_class(command_name),
                             successful: true,
-                            argv: argv)
+                            argv: argv || [])
       command.run
     rescue InvalidFileError, InvalidValidationError => e
       command.update_attributes(successful: false)

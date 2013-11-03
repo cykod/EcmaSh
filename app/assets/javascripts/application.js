@@ -12,7 +12,9 @@
 //= require lib/lodash
 //= require lib/zepto
 //= require lib/backbone
+//= require handlebars
 //= require base
 //= require_tree ./include
 //= require_tree ./models
+//= require_tree ../templates
 //= require_tree ./views

@@ -1,5 +1,7 @@
 ;(function(EcmaSh) {
 
+  EcmaSh.commands = {};
+
   EcmaSh.Command = Backbone.Model.extend({
 
     initialize: function(attributes,options) {
@@ -25,6 +27,11 @@
       });
     }
   });
+
+  EcmaSh.Command.run = function(name, args) {
+    var commandClass = EcmaSh.commands[name] || EcmaSh.Command;
+    return new commandClass(args,{ type: name });
+  }
 
   
 }(EcmaSh));

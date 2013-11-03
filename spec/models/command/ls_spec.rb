@@ -26,7 +26,11 @@ describe Command::Ls do
     it "returns the file if it's there" do
       result = run_ls_command(file.fullpath)
       result[0]['fullpath'].should == file.fullpath
+    end
 
+    it "returns the current directory without any args" do
+      result = Command.run(user,:ls,{ CWD: dir.fullpath },[ ])
+      result[0]['fullpath'].should == subdir1.fullpath
     end
   end
 end
