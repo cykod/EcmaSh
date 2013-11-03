@@ -1,8 +1,9 @@
 class Command::Ls < ::Command
   def run
-    node = Node.fetch(resolve_path(argv[0] || "."))
+    node_path = resolve_path(argv[0] || ".")
+    node = Node.fetch(node_path)
 
-    raise InvalidFileError.new(argv[0]) unless node && user.can_read?(node)
+    raise InvalidFileError.new(node_path) unless node && user.can_read?(node)
 
     nodes = node.directory? ? node.children : [ node ]
 

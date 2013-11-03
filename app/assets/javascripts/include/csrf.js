@@ -1,4 +1,4 @@
-;(function(window) {
+;(function($) {
 
   /*
    * https://github.com/dcompute/Zepto-CSRF
@@ -21,17 +21,16 @@
 
 
     $.extend($.ajaxSettings, {
-      beforeSend : function (xhr, settings) {console.log(settings);
-      if (
+      beforeSend : function (xhr, settings) {
+      if(
         !(/^(GET|HEAD|OPTIONS|TRACE)$/.test(settings.type)) &&
         sameOrigin(settings.url)
         ) {
           var token = $('meta[name="csrf-token"]').attr('content');
           xhr.setRequestHeader("X-CSRF-Token", token);
         }
-
       }
     }); 
 
 
-}(window));
+}(Zepto));

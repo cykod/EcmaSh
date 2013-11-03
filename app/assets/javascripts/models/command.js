@@ -14,18 +14,20 @@
 
     run: function() {
       var self = this;
+      var data = _.pick(this.attributes,'argv','context');
 
       this.save({}, {
         success: function() { 
-          self.trigger("ran", self.get("result"));
+          self.trigger("ran", self);
         },
         error: function(model,xhr) { 
           var result = $.parseJSON(xhr.response)
           self.set("error",result.error)
-          self.trigger("error",result.error);
-        }
+        },
+        data: $.param(data)
       });
     }
+
   });
 
   EcmaSh.Command.run = function(name, args) {
