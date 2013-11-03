@@ -10,7 +10,7 @@
 
 
     defaults: {
-      PROMPT: "{{CWD}}$"
+      PROMPT: "{{CWD}} $ "
     },
 
     initialize: function() {
@@ -34,10 +34,12 @@
     },
 
     checkSubmit: function(e) {
+      var self = this;
+
       if(e.which == 13 && !e.shiftKey) {
         e.preventDefault();
 
-        var command = this.$(".prompt-command").val();
+        var command = this.$(".prompt-command").val().trim();
         var argv = command.split(" ");
         var name = argv.shift();
 
@@ -48,11 +50,16 @@
           argv: argv, 
         });
 
+        this.$el.hide();
+
         this.collection.add(command);
-        command.run();
+
+        command.run(function() {
+          self.$el.show();
+          self.render();
+          self.focusPrompt();
+        });
         
-        this.render();
-        this.focusPrompt();
       }
 
     }

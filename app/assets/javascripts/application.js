@@ -10,7 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //= require lib/lodash
-//= require lib/zepto
+//= require lib/jquery
 //= require lib/backbone
 //= require handlebars
 //= require base

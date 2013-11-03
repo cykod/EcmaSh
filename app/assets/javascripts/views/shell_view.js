@@ -16,7 +16,7 @@
 
     focusPrompt: function(e) {
       // only if the click is on the empty shell
-      if(e.target == $(".shell")[0]) {
+      if(!e || e.target == $(".shell")[0]) {
         this.$(".prompt-command").focus();
       }
     },
@@ -25,6 +25,7 @@
       EcmaSh.BaseView.prototype.render.apply(this);
       this.assign(this.commandPrompt, ".prompt");
 
+      this.focusPrompt();
     },
 
     addHistoryView: function(view) {
@@ -39,6 +40,8 @@
       } else if(model instanceof EcmaSh.Result) {
         this.addHistoryView(new EcmaSh.ResultView({ model: model }));
       }
+
+      this.el.scrollTop = this.el.scrollHeight;
     }
   });
 
