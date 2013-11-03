@@ -32,7 +32,9 @@ module EcmaSh
         :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
       }
     }
-
     end
+
+    config.middleware.swap(ActionDispatch::Static, Rack::Zippy::AssetServer)
+
   end
 end

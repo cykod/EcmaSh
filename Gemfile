@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby "2.0.0"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
 
@@ -12,6 +14,7 @@ gem "dotenv"
 gem "puma"
 gem "handlebars_assets"
 gem 'jbuilder', '~> 1.2'
+gem "rack-zippy"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -34,6 +37,8 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
   gem "simplecov"
 end
+
+gem 'rails_12factor', group: :production
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
