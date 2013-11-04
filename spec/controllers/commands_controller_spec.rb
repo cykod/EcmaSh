@@ -1,6 +1,7 @@
 require "spec_helper"
 
 describe CommandsController do
+  render_views
 
   context "no user" do
 
