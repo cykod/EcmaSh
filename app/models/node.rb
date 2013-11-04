@@ -6,6 +6,8 @@ class Node < ActiveRecord::Base
   before_save :set_full_path
   before_save :set_parent_ids
 
+  scope :directories, -> { where("type = 'DirectoryNode'") }
+
   def directory?; false; end
 
   validates :name, format: { with:  /\A[a-zA-Z\-._0-9]+\z/ }, uniqueness: { scope:  :parent_id }
@@ -15,7 +17,7 @@ class Node < ActiveRecord::Base
   SECRET = 3   # only user can read
 
   def self.fetch(fullpath)
-    Node.where(fullpath: fullpath).first
+    where(fullpath: fullpath).first
   end
 
 

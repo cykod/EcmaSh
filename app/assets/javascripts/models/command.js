@@ -6,6 +6,7 @@
 
     initialize: function(attributes,options) {
       this.type = this.type || options.type
+      this.context = options.context;
     },
 
     url: function() {
@@ -14,7 +15,7 @@
 
     run: function(callback) {
       var self = this;
-      var data = _.pick(this.attributes,'argv','context');
+      var data = { argv: this.get("argv"), context: this.context.toJSON() };
 
       this.save({}, {
         success: function() { 
@@ -32,10 +33,24 @@
 
   });
 
-  EcmaSh.Command.run = function(name, args) {
+  EcmaSh.Command.run = function(name,context,args) {
     var commandClass = EcmaSh.commands[name] || EcmaSh.Command;
-    return new commandClass(args,{ type: name });
+    return new commandClass(args,{ type: name, context: context });
   }
+
+  EcmaSh.CdCommand = EcmaSh.Command.extend({
+    initialize: function(attributes,options) {
+      EcmaSh.Command.prototype.initialize.call(this,attributes,options);
+      this.on("ran",this.changeDirectory,this);
+    },
+
+    changeDirectory: function() {
+      this.context.set("CWD",this.get("result").fullpath);
+    }
+
+  });
+
+  EcmaSh.commands['cd'] = EcmaSh.CdCommand;
 
   
 }(EcmaSh));

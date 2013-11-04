@@ -43,8 +43,7 @@
         var argv = command.split(" ");
         var name = argv.shift();
 
-        var command = EcmaSh.Command.run(name, { 
-          context: this.model.toJSON(), 
+        var command = EcmaSh.Command.run(name, this.model, { 
           promptLine: this.promptLine(),
           command: command,
           argv: argv, 
