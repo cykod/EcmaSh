@@ -17,4 +17,9 @@ class User < ActiveRecord::Base
   def can_write?(node)
     access(node).write?
   end
+
+  def can_write_directory?(node)
+    return false unless node && node.directory?
+    can_write?(node)
+  end
 end

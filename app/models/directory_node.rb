@@ -7,6 +7,16 @@ class DirectoryNode < Node
 
   def directory?; true; end
 
+  def fetch(url)
+    file = URI.parse(url)
+
+    FileNode.create(
+      user: self.user,
+      parent: self,
+      file: file
+    )
+  end
+
   protected
 
   def update_children_path

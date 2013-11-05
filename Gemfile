@@ -10,7 +10,7 @@ gem 'pg'
 gem 'aws-sdk'
 gem 'paperclip'
 gem "devise"
-gem "dotenv"
+gem "dotenv-rails"
 gem "puma"
 gem "handlebars_assets"
 gem 'jbuilder', '~> 1.2'

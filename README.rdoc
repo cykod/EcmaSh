@@ -1,17 +1,6 @@
 == README
 
 
-Users - auto create a user
-Login with GitHub or anonymous
-
-
-Base class 
-FileNode
-Directories
-Files - either text or binary based
-Text Files
-
-
 Commands
 
 
