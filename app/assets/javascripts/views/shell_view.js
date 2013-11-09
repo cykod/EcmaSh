@@ -4,7 +4,9 @@
     template: "shell",
 
     events: {
-      "click": "focusPrompt"
+      "click": "focusPrompt",
+     // "paste .prompt": "handlePaste"
+      "input .prompt": "handleChange"
     },
 
     initialize: function() {
@@ -53,7 +55,16 @@
       }
 
       this.el.scrollTop = this.el.scrollHeight;
+    },
+
+    handleChange: function(e) {
+      var $elem = $(e.currentTarget);
+      var html = $elem.html();
+      if(html.match(/</)) {
+        $elem.text($elem.text());
+      }
     }
+
   });
 
 

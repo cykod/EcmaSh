@@ -26,6 +26,8 @@ EcmaSh.BaseView = Backbone.View.extend({
       return false;
     }
   }
+
+
 });
 
 
