@@ -4,6 +4,8 @@ describe Access do
 
   let(:user) { create :user }
   let(:user2) { create :user }
+  
+  let(:access) { user.access }
 
   let(:own_directory_node) { create :directory_node, user: user }
   let(:own_file_node)  { create :file_node, user: user, parent: own_directory_node }
@@ -20,23 +22,23 @@ describe Access do
   describe "#read?" do
 
     it "should give a user read access to a node they own" do
-      user.can_read?(own_file_node).should be_true
+      user.access.read?(own_file_node).should be_true
     end
 
     it "should give read access to a directory they own" do
-      user.access(own_directory_node).read?.should be_true
+      user.access.read?(own_directory_node).should be_true
     end
 
     it "should give access to someone else's public node" do
-      user.access(public_file_node).read?.should be_true
+      user.access.read?(public_file_node).should be_true
     end
 
     it "should give acess to someone else's private node" do
-      user.access(private_file_node).read?.should be_true
+      user.access.read?(private_file_node).should be_true
     end
 
     it "shouldn't give access to someone else's secret node directory" do
-      user.access(secret_file_node).read?.should be_false
+      user.access.read?(secret_file_node).should be_false
     end
 
   end
@@ -44,23 +46,23 @@ describe Access do
   describe "#write?" do
 
     it "should give user write access to it's own node" do
-      user.can_write?(own_file_node).should be_true
+      user.access.write?(own_file_node).should be_true
     end
 
     it "should give user write access to it's own directory" do
-      user.access(own_directory_node).write?.should be_true
+      user.access.write?(own_directory_node).should be_true
     end
 
     it "shouldn't give access to someone elses public directory" do
-      user.access(public_directory_node).write?.should be_false
+      user.access.write?(public_directory_node).should be_false
     end
 
     it "shouldn't give access to someone elses private directory" do
-      user.access(private_directory_node).write?.should be_false
+      user.access.write?(private_directory_node).should be_false
     end
 
     it "shouldn't give access to someone elses secret directory" do
-      user.access(secret_directory_node).write?.should be_false
+      user.access.write?(secret_directory_node).should be_false
     end
   end
 
@@ -68,19 +70,19 @@ describe Access do
   describe "#list?" do
 
     it "should give user list access to it's own directory" do
-      user.access(own_directory_node).list?.should be_true
+      user.access.list?(own_directory_node).should be_true
     end
 
     it "shouldn't give list access to someone elses public directory" do
-      user.access(public_directory_node).list?.should be_true
+      user.access.list?(public_directory_node).should be_true
     end
 
     it "shouldn't give list access to someone elses private directory" do
-      user.access(private_directory_node).list?.should be_false
+      user.access.list?(private_directory_node).should be_false
     end
 
     it "shouldn't give list access to someone elses secret directory" do
-      user.access(secret_directory_node).list?.should be_false
+      user.access.list?(secret_directory_node).should be_false
     end
   end
 

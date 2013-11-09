@@ -1,0 +1,14 @@
+<div class='line'>Welcome to EcmaSh - login with guest, register or your username</div>
+{{#if state}}
+  {{line "login:" state}}
+{{else}}
+
+  {{line "login:" username}}
+  {{#if username}}
+    {{#if password}}
+      {{line "password:" "&bull;&bull;&bull;&bull;&bull;"}}
+    {{else}}
+      {{line "password:" password}}
+    {{/if}}
+  {{/if}}
+{{/if}}

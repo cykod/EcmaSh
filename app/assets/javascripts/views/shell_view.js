@@ -8,28 +8,39 @@
     },
 
     initialize: function() {
-      this.commandPrompt = new EcmaSh.PromptView({ model: this.model, 
-                                                   collection: this.collection });
+    //  this.commandPrompt = new EcmaSh.PromptView({ model: this.model, 
+    //                                               collection: this.collection });
+
+      this.commandPrompt = new EcmaSh.LoginView({ model: this.model.user});
+                                                    
+      this.model.user.on("change:state",this.checkUser,this);
 
       this.collection.on("add",this.addToHistory,this);
+    },
+
+    checkUser: function(model) {
+      var state = model.get("state");
+      if(state == 'guest' || state == 'register') {
+        this.commandPrompt = new EcmaSh.RegisterView({ model: model });
+        this.$el.append(this.commandPrompt.render().el);
+      }
     },
 
     focusPrompt: function(e) {
       // only if the click is on the empty shell
       if(!e || e.target == $(".shell")[0]) {
-        this.$(".prompt-command").focus();
+        this.$(".prompt").focus();
       }
     },
 
     render: function() {
-      EcmaSh.BaseView.prototype.render.apply(this);
-      this.assign(this.commandPrompt, ".prompt");
-
+      this.$el.empty();
+      this.$el.append(this.commandPrompt.render().el);
       this.focusPrompt();
     },
 
     addHistoryView: function(view) {
-      this.$(".history").append(view.render().el);
+      this.commandPrompt.$el.before(view.render().el);
     },
 
     addToHistory: function(model) {

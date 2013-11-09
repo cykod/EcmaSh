@@ -1,13 +1,22 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
-
 
   def require_user
     if !current_user
       render nothing: true, status: 403
       return false
     end
+  end
+
+  def current_user_id
+    @current_user_id = UserKey.authenticate(params[:token]  || cookies[:token]).try(:user_id)
+  end
+
+  def current_access
+    @current_key = UserKey.authenticate(params[:token]  || cookies[:token]).try(:user_id)
+  end
+
+
+  def current_user
+    @current_user ||= User.where(id: current_user_id).first
   end
 end

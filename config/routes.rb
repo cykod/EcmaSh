@@ -1,5 +1,7 @@
 EcmaSh::Application.routes.draw do
-  devise_for :users
+
+  resources :sessions, only: [ :create, :delete ]
+  resources :users, only: [ :create ]
 
   #get "/commands" - history
   #get "/commands/:id" - history

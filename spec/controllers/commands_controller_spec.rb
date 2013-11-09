@@ -61,11 +61,9 @@ describe CommandsController do
         end
 
         it "creates a command for the user" do
-
           expect { 
             post :create, id: "ls", argv: [ file.fullpath ]
           }.to change { user.commands.successful.count }.by(1)
-
         end
 
       end

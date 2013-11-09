@@ -5,9 +5,9 @@ class Command::Mkdir < ::Command
 
     node = Node.fetch(join_path(parts[0..-2]))
 
-    raise InvalidFileError.new(argv[0]) unless node && user.can_write?(node) && node.directory?
+    raise InvalidFileError.new(argv[0]) unless access.write_directory?(node) 
 
-    dirnode = DirectoryNode.create(name: dirname, parent: node, user: user)
+    dirnode = DirectoryNode.create(name: dirname, parent: node, user_id: user_id)
 
     raise InvalidValidationError.new(dirnode.errors) unless dirnode.valid?
 

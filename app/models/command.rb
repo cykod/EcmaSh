@@ -25,13 +25,14 @@ class Command < ActiveRecord::Base
     "Command::#{command.to_s.camelcase}"
   end
 
-  def self.run(user,command_name,context,argv = [])
+  def self.run(user_id,command_name,context,argv = [])
+    user_id = user_id.id if user_id.is_a?(User)
     command = nil
 
     return InvalidCommandError.new(command_name) unless valid_command?(command_name)
 
     begin 
-      command = Command.new(user: user,
+      command = Command.new(user_id: user_id,
                             context: (context || {}).stringify_keys,
                             type: command_class(command_name),
                             successful: true,
@@ -42,8 +43,12 @@ class Command < ActiveRecord::Base
       return e
     end
 
-    command.save
+    command.save.inspect
     command.output
+  end
+
+  def access
+    @access ||= Access.new(self.user_id)
   end
 
 

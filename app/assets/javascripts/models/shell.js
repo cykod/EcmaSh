@@ -3,10 +3,12 @@
   EcmaSh.Shell = Backbone.Model.extend({
     initialize: function(attributes,options) {
 
+      this.user = new EcmaSh.User({ });
+
       this.commandHistory = new EcmaSh.CommandHistory();
 
       this.shellView = new EcmaSh.ShellView({ el: options.el,
-                                              model: this,
+                                              model: this, 
                                               collection: this.commandHistory }).render();
 
     }

@@ -9,12 +9,12 @@ gem 'rails', '4.0.1'
 gem 'pg'
 gem 'aws-sdk'
 gem 'paperclip'
-gem "devise"
 gem "dotenv-rails"
 gem "puma"
 gem "handlebars_assets"
 gem 'jbuilder', '~> 1.2'
 gem "rack-zippy"
+gem 'bcrypt-ruby'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

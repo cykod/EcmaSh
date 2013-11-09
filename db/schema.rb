@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131027230926) do
+ActiveRecord::Schema.define(version: 20131105130449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20131027230926) do
   end
 
   create_table "file_node_contents", force: true do |t|
-    t.string   "content"
+    t.text     "content"
     t.integer  "file_node_id"
     t.string   "content_type"
     t.datetime "created_at"
@@ -55,18 +55,21 @@ ActiveRecord::Schema.define(version: 20131027230926) do
   add_index "nodes", ["fullpath"], name: "index_nodes_on_fullpath", using: :btree
   add_index "nodes", ["user_id"], name: "index_nodes_on_user_id", using: :btree
 
+  create_table "user_keys", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "valid_until"
+    t.string   "token"
+    t.inet     "ip"
+    t.datetime "created_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "username"
     t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "password_digest",        default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

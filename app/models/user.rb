@@ -1,25 +1,24 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable
+  has_secure_password validations: false
+
+  validates :password, presence: true, :on => :create
+  validates :username, presence: true, uniqueness: true
 
   has_many :commands
+  has_many :user_keys
 
-  def access(node)
-    Access.new(self,node)
+  def self.login(username,password)
+    return false if username.blank?
+    user = User.where(username: username).first || User.where(email: username).first
+    user.try(:authenticate,password)
   end
 
-  def can_read?(node)
-    access(node).read?
+  def access
+    @access ||= Access.new(self)
   end
 
-  def can_write?(node)
-    access(node).write?
+  def generate_key(valid_until=nil)
+    self.user_keys.create(valid_until: valid_until || (Time.now+2.weeks)).token
   end
 
-  def can_write_directory?(node)
-    return false unless node && node.directory?
-    can_write?(node)
-  end
 end

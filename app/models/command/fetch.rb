@@ -3,7 +3,7 @@ class Command::Fetch < ::Command
     node_path = resolve_path(".")
     directory = Node.fetch(node_path)
 
-    raise CantWriteError.new(node_path) unless user.can_write_directory?(directory) 
+    raise CantWriteError.new(node_path) unless access.write_directory?(directory) 
 
     node = directory.fetch(argv[0])
 

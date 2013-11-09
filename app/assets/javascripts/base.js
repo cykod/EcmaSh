@@ -14,6 +14,17 @@ EcmaSh.BaseView = Backbone.View.extend({
   render: function() {
     this.$el.empty().html(this.tmpl(this.model ? this.model.toJSON() : {}));
     return this;
+  },
+
+
+  pressedEnter: function(e) {
+
+    if(e.which == 13 && !e.shiftKey) {
+      e.preventDefault();
+      return true;
+    } else {
+      return false;
+    }
   }
 });
 

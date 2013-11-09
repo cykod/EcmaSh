@@ -1,0 +1,14 @@
+<div class='line'>Register for an account</div>
+{{line "username:" username}}
+{{#if username}}
+  {{#if password}}
+    {{line "password:" "•••••"}}
+  {{else}}
+    {{line "password:" password}}
+  {{/if}}
+{{/if}}
+
+{{#if password}}
+{{line "email:" email}}
+<div class='line'>(optional, for account retrieval)</div>
+{{/if}}

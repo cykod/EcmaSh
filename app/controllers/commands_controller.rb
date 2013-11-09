@@ -2,7 +2,7 @@ class CommandsController < ApplicationController
   before_filter :require_user
 
   def create
-    result = Command.run(current_user,command_id,context_args,command_args)
+    result = Command.run(current_user_id,command_id,context_args,command_args)
 
     if result.is_a?(RuntimeError) 
       render json: { error: result.to_s }, status: 406
