@@ -3,6 +3,8 @@ require "spec_helper"
 describe SessionsController do
   render_views
 
+  let(:json_body) { JSON.parse(response.body) }
+
   describe "#create" do
 
 
@@ -13,6 +15,10 @@ describe SessionsController do
         response.status.should == 401
       end
 
+      it "returns an error message" do
+        post :create, username: "tester", password: "tester"
+        json_body["error"].should_not be_nil
+      end
     end
 
     context "valid credentials" do
@@ -28,8 +34,7 @@ describe SessionsController do
           post :create, username: "john", password: "mytester"
         }.to change { UserKey.count }.by(1)
 
-        body = JSON.parse(response.body)
-        body['api_key'].should == UserKey.last.token
+        json_body["api_key"].should == UserKey.last.token
       end
     end
   end

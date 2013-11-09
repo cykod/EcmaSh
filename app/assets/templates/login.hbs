@@ -1,4 +1,7 @@
 <div class='line'>Welcome to EcmaSh - login with guest, register or your username</div>
+{{#if error}}
+  <div class='line error'>Couldn't login - bad credentials</div>
+{{/if}}
 {{#if state}}
   {{line "login:" state}}
 {{else}}

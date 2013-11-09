@@ -13,6 +13,7 @@
 
     render: function() {
       EcmaSh.BaseView.prototype.render.apply(this);
+      this.$(".prompt").focus();
       return this;
     },
 
@@ -42,13 +43,19 @@
         this.model.set("username",value);
       }
       this.render();
-      this.$(".prompt").focus();
     },
 
     setPassword: function(value) {
       this.model.set("password",value);
       this.render();
-      this.model.save();
+
+      var self = this;
+      this.model.save({},{
+        error: function(model,xhr) {
+          model.set(JSON.parse(xhr.responseText));
+          self.render();
+        }
+      });
     }
 
   });

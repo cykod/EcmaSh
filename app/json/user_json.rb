@@ -7,4 +7,12 @@ class UserJSON < JSONBase
     end
   end
 
+  def self.failure_json(err)
+    Jbuilder.encode do |json|
+      json.username nil
+      json.password nil
+      json.error err
+    end
+  end
+
 end

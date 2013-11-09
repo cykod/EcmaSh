@@ -28,6 +28,7 @@ input { font-size:16px; font-family: 'Anonymous Pro', sans-serif;  }
   width:100%;
   position:relative;
   overflow:hidden;
+  min-height:20px;
 
   label {
     padding:4px 0px;
@@ -41,11 +42,12 @@ input { font-size:16px; font-family: 'Anonymous Pro', sans-serif;  }
     border:0px;
     color:$green;
     display:block;
-    min-height:23px;
+    min-height:20px;
     min-width:100px;
 
     &:focus{ outline:none; }
   }
 
+  &.error { color: #830000; }
 
 }

@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if @user
       render json: UserJSON.new(@user).new_session_json
     else
-      render nothing: true, status: :unauthorized
+      render json: UserJSON.failure_json("Invalid Login"), status: :unauthorized
     end
   end
 
