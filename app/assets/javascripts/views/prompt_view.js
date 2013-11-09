@@ -2,9 +2,10 @@
 
   EcmaSh.PromptView = EcmaSh.BaseView.extend({
     template: "prompt",
+    className: "line",
 
     events: {
-      "keyup .prompt-command": "checkSubmit",
+      "keyup .prompt": "checkSubmit",
       "click": "focusPrompt"
     },
 
@@ -21,16 +22,18 @@
     },
 
     render: function() {
-      this.$el.empty().html(this.tmpl({ line: this.promptLine() }));
+      var output = this.tmpl({ promptLine: this.promptLine() });
+      this.$el.empty().html(output);
     },
 
     promptLine: function() {
       var props = this.props();
-      return  Handlebars.compile(props.PROMPT)(props);
+      var line =  Handlebars.compile(props.PROMPT)(props);
+      return line;
     },
 
     focusPrompt: function() {
-      this.$(".prompt-command").focus();
+      this.$(".prompt").focus();
     },
 
     checkSubmit: function(e) {
@@ -39,7 +42,7 @@
       if(e.which == 13 && !e.shiftKey) {
         e.preventDefault();
 
-        var command = this.$(".prompt-command").val().trim();
+        var command = this.$(".prompt").text().trim();
         var argv = command.split(" ");
         var name = argv.shift();
 

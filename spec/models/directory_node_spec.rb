@@ -3,7 +3,7 @@ require 'spec_helper'
 describe DirectoryNode do
   
 
-  context "#update_children_path" do
+  describe "#update_children_path" do
 
     let(:dir1) { create :directory_node }
     let(:dir2) { create :directory_node, parent: dir1 }
@@ -15,4 +15,24 @@ describe DirectoryNode do
     end
 
   end
+
+  describe ".home_node" do
+
+    it "creates the home node if there isn't one" do
+      expect { 
+        DirectoryNode.home_node
+      }.to change { DirectoryNode.count }.by(1)
+    end
+
+    it "has a path of /home" do
+      DirectoryNode.home_node.fullpath.should == "/home"
+    end
+
+    it "returns the same node if it already exists" do
+      DirectoryNode.home_node.should == DirectoryNode.home_node
+    end
+
+  end
+
+
 end

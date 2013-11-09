@@ -40,8 +40,10 @@
     hasEmail: function() { return this.model.get("email"); },
 
     setUsername: function(value) {
-      this.model.set("username",value);
-      this.render();
+      var self = this;
+      this.model.checkUsername(value,function(value) {
+        self.render();
+      });
     },
 
     setPassword: function(value) {
@@ -51,6 +53,7 @@
 
     setEmail: function(value) {
       this.model.set("email",value);
+      this.model.save();
       this.render();
     }
 

@@ -13,6 +13,13 @@ describe RegistrationsController do
       json_body["error"].should be_nil
     end
 
+    it "returns an error if the username is invalid" do
+      create :user, username: "franker", password: "tester"
+
+      get :show, id: "franker"
+      json_body["error"].should_not be_nil
+    end
+
   end
     
 

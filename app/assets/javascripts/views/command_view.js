@@ -1,7 +1,7 @@
 (function(EcmaSh) {
 
   EcmaSh.CommandView = EcmaSh.BaseView.extend({
-    className: "command",
+    className: "line",
     template: "command",
     initialize: function() {
 

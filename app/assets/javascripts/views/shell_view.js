@@ -10,21 +10,30 @@
     },
 
     initialize: function() {
-    //  this.commandPrompt = new EcmaSh.PromptView({ model: this.model, 
-    //                                               collection: this.collection });
-
       this.commandPrompt = new EcmaSh.LoginView({ model: this.model.user});
                                                     
       this.model.user.on("change:state",this.checkUser,this);
+      this.model.user.on("change:api_key",this.loggedIn,this);
 
       this.collection.on("add",this.addToHistory,this);
     },
 
-    checkUser: function(model) {
-      var state = model.get("state");
+    checkUser: function(user) {
+      var state = user.get("state");
       if(state == 'guest' || state == 'register') {
-        this.commandPrompt = new EcmaSh.RegisterView({ model: model });
-        this.$el.append(this.commandPrompt.render().el);
+        this.commandPrompt = new EcmaSh.RegisterView({ model: user });
+        this.$el.append(this.commandPrompt.el);
+        this.commandPrompt.render();
+      }
+    },
+
+    loggedIn: function(user) {
+      var api_key = user.get("api_key");
+      if(api_key) {
+        this.model.set("CWD","/home/" + user.get("username"));
+        this.commandPrompt = new EcmaSh.PromptView({ model: this.model, collection: this.collection });
+        this.$el.append(this.commandPrompt.el);
+        this.commandPrompt.render();
       }
     },
 

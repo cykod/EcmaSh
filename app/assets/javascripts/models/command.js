@@ -15,7 +15,7 @@
 
     run: function(callback) {
       var self = this;
-      var data = { argv: this.get("argv"), context: this.context.toJSON() };
+      var data = { argv: this.get("argv"), context: this.context.toJSON(), token: this.context.user.get("api_key")};
 
       this.save({}, {
         success: function() { 

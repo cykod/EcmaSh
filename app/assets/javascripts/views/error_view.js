@@ -1,7 +1,7 @@
 (function(EcmaSh) {
 
   EcmaSh.ErrorView = EcmaSh.BaseView.extend({
-    className: "error",
+    className: "line error",
     template: "error"
   });
 

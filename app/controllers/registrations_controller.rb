@@ -1,9 +1,10 @@
 class RegistrationsController < ApplicationController
 
   def create
-    @user = User.create(user_params)
+    @registration = Registration.new(user_params)
 
-    if @user.valid?
+    if @registration.valid?
+      @user = @registration.register!
       render json: UserJSON.new(@user).new_session_json
     else
       render json: UserJSON.failure_json("Invalid Login"), status: :unauthorized
@@ -11,9 +12,13 @@ class RegistrationsController < ApplicationController
   end
 
   def show
-    User.where(username: user_params[:id]).first
+    @registration = Registration.new(user_params)
 
-    render json: {}
+    if @registration.valid? 
+      render json: { error: nil}
+    else
+      render json: { error: @registration.errors.full_messages.join(", ") } 
+    end
   end
 
 

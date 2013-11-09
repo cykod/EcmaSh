@@ -1,4 +1,7 @@
 <div class='line'>Register for an account</div>
+{{#if error}}
+  <div class='line error'>{{error}}</div>
+{{/if}}
 {{line "username:" username}}
 {{#if username}}
   {{#if password}}

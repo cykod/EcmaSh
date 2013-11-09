@@ -4,6 +4,10 @@ class DirectoryNode < Node
 
   after_save  :update_children_path
 
+  def self.home_node
+    self.fetch("/home") || self.create(name: "home")
+  end
+    
 
   def directory?; true; end
 
