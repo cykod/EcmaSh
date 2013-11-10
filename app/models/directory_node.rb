@@ -8,7 +8,6 @@ class DirectoryNode < Node
     self.fetch("/home") || self.create(name: "home")
   end
     
-
   def directory?; true; end
 
   def download(url)

@@ -50,4 +50,18 @@ input { font-size:16px; font-family: 'Anonymous Pro', sans-serif;  }
 
   &.error { color: #830000; }
 
+  .running { 
+    float:right;
+    -webkit-animation: rotater 0.5s linear 0s 500 normal;
+  }
+
 }
+
+
+@-webkit-keyframes rotater {
+   from { -webkit-transform: rotate(0deg); }
+   to   { -webkit-transform: rotate(360deg); }
+}
+
+
+

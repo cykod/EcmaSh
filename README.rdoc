@@ -1,6 +1,14 @@
 == README
 
 
+ToDo:
+=====
+
+1. Fix files to be allowed to be named anything (not like directories) - w/ spaces/etc
+2. Finish tests for fetch
+3. more / less command
+
+
 Commands
 
 

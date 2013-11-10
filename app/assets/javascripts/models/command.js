@@ -50,7 +50,40 @@
 
   });
 
+  EcmaSh.UploadCommand = EcmaSh.Command.extend({
+    initialize: function(attributes,options) {
+      EcmaSh.Command.prototype.initialize.call(this,attributes,options);
+    },
+
+    run: function(callback) {
+      var self = this;
+
+      var formdata = new FormData();
+      for(var i =0;i<this.get("argv").length;i++) {
+        formdata.append("files[]",this.get("argv")[i]);
+      }
+      formdata.append("token",this.context.user.get("api_key"));
+
+      this.save({}, {
+        url: this.context.get("CWD"),
+        data: formdata,  
+        processData: false,  
+        contentType: false,  
+        success: function() { 
+          self.trigger("ran", self);
+          if(callback) callback();
+        },
+        error: function(model,xhr) { 
+          var error = xhr.responseJSON && xhr.responseJSON.error ? xhr.responseJSON.error : "Unknown Error";
+          self.set("error",error);
+          if(callback) callback();
+        }
+      });
+    }
+  });
+
   EcmaSh.commands['cd'] = EcmaSh.CdCommand;
+  EcmaSh.commands['upload'] = EcmaSh.UploadCommand;
 
   
 }(EcmaSh));

@@ -5,8 +5,10 @@
 
     events: {
       "click": "focusPrompt",
-     // "paste .prompt": "handlePaste"
-      "input .prompt": "handleChange"
+      "input .prompt": "handleChange",
+      "drop": "handleDrop",
+      "dragenter": "handleDrag",
+      "dragover": "handleDrag",
     },
 
     initialize: function() {
@@ -72,8 +74,24 @@
       if(html.match(/</)) {
         $elem.text($elem.text());
       }
-    }
+    },
 
+    handleDrag: function(e) {
+      e.preventDefault();
+    },
+
+    handleDrop: function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      var files = e.originalEvent.dataTransfer.files;
+
+      var command = EcmaSh.Command.run("upload", this.model, { 
+        argv: files
+      });
+
+      this.collection.add(command);
+      command.run();
+    }
   });
 
 
