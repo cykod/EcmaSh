@@ -7,7 +7,7 @@ class RegistrationsController < ApplicationController
       @user = @registration.register!
       render json: UserJSON.new(@user).new_session_json
     else
-      render json: UserJSON.failure_json("Invalid Login"), status: :unauthorized
+      render json: UserJSON.failure_json("Invalid Username"), status: :unauthorized
     end
   end
 

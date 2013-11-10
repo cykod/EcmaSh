@@ -5,7 +5,7 @@ class Command::Fetch < ::Command
 
     raise CantWriteError.new(node_path) unless access.write_directory?(directory) 
 
-    node = directory.fetch(argv[0])
+    node = directory.download(argv[0])
 
     output!(NodeJSON.new(node).list_hash)
   end

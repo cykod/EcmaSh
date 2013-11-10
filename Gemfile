@@ -36,6 +36,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_girl_rails", "~> 4.0"
   gem "simplecov"
+  gem "fakeweb"
 end
 
 gem 'rails_12factor', group: :production

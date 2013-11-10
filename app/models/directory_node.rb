@@ -11,14 +11,18 @@ class DirectoryNode < Node
 
   def directory?; true; end
 
-  def fetch(url)
+  def download(url)
     file = URI.parse(url)
 
-    FileNode.create(
-      user: self.user,
-      parent: self,
-      file: file
-    )
+    begin 
+      FileNode.create(
+        user: self.user,
+        parent: self,
+        file: file
+      )
+    rescue OpenURI::HTTPError
+      return nil
+    end
   end
 
   protected
