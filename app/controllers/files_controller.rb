@@ -13,6 +13,24 @@ class FilesController < ApplicationController
     end
   end
 
+  def show
+    node = Node.fetch("/home/" + params[:directory].to_s)
+
+    access = Access.new(current_user_id)
+
+    if access.read?(node)
+      if node.directory?
+        # show a listing
+      elsif has_content?
+        send_data node.content, :type => node.content_type, :disposition => 'inline', name: node.name
+      else
+        redirect_to node.file_url
+      end
+    end
+
+
+  end
+
   protected
 
   def context_args
