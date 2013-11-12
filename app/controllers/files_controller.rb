@@ -21,14 +21,14 @@ class FilesController < ApplicationController
     if access.read?(node)
       if node.directory?
         # show a listing
-      elsif has_content?
+      elsif node.has_content?
         send_data node.content, :type => node.content_type, :disposition => 'inline', name: node.name
       else
-        redirect_to node.file_url
+        redirect_to node.file(:original)
       end
+    else
+      return render nothing: true, status: 404
     end
-
-
   end
 
   protected

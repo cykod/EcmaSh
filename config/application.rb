@@ -34,6 +34,10 @@ module EcmaSh
     }
     end
 
+    class Rack::Zippy::AssetServer
+      def has_static_extension?(path); return false; end
+    end
+    
 
     config.middleware.swap(ActionDispatch::Static, Rack::Zippy::AssetServer)
 

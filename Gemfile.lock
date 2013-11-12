@@ -73,8 +73,6 @@ GEM
       mime-types
     pg (0.17.0)
     polyglot (0.3.3)
-    puma (2.6.0)
-      rack (>= 1.1, < 2.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -162,7 +160,6 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   paperclip
   pg
-  puma
   rack-zippy
   rails (= 4.0.1)
   rails_12factor

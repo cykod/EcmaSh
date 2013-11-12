@@ -33,6 +33,15 @@ describe Command::Mkdir do
       result.is_a?(InvalidFileError).should be_true
     end
 
+    it "doesn't allow you to have spaces or special characters in your directory" do
+      result = nil
+      expect { 
+        result = run_mkdir_command(dir.fullpath, "tester rama")
+      }.to change { DirectoryNode.count }.by(0)
+
+      result.to_s.should include("Error")
+    end
+
     it "allows you to create directories in your own directories" do
       expect { 
         result = run_mkdir_command(dir.fullpath, "tester")
