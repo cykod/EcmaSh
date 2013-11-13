@@ -16,6 +16,8 @@ ToDo:
 
 pipe pipes the actual JSON around - use JS to extract
 
+JSH - js shell files that can be get or posted to on the domain
+
 Hosting
 =========
 .txt, .css, .html and .js, .json and .csv served directly
