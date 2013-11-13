@@ -1,6 +1,6 @@
 class FileNode < Node
 
-  has_attached_file :file, :styles =>  { :small  => "160x120#" }
+  has_attached_file :file
 
   before_validation :set_name_and_properties, on: :create
 

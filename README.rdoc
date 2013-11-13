@@ -5,11 +5,21 @@ ToDo:
 =====
 
 1. Fix files to be allowed to be named anything (not like directories) - w/ spaces/etc
-2. Finish tests for fetch
-3. more / less command
-4. Figure out hosting / directory structure
-5. Tab completion
-6. up / down for history
+2. more / less command
+3. Figure out hosting / directory structure
+4. Tab completion
+5. up / down for history
+6. mv command
+7. cp command
+8. public / private directories
+9. Add bing search api + JSON awk-type extractor
+
+pipe pipes the actual JSON around - use JS to extract
+
+Hosting
+=========
+.txt, .css, .html and .js, .json and .csv served directly
+everything else served via cloudfront
 
 
 Commands
