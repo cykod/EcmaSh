@@ -1,7 +1,7 @@
 D .<br/>
 D ..<br/>
 {{#each result}}
-{{#if directory}}D{{else}} {{/if}}
+{{#if directory}}D {{name}}<br/>{{else}} 
 <a href='{{fullpath}}' target='_blank'>{{name}}</a><br/>
-<img src='{{fullpath}}' />
+{{/if}}
 {{/each}}

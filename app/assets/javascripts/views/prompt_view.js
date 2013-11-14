@@ -25,6 +25,7 @@
       var output = this.tmpl({ promptLine: this.promptLine() });
       this.$el.empty().html(output);
       this.focusPrompt();
+      return this;
     },
 
     promptLine: function() {

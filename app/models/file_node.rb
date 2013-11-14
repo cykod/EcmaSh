@@ -18,6 +18,18 @@ class FileNode < Node
     self.has_content? ? self.file_node_content.content_type : self.file_content_type
   end
 
+  def image?
+    self.file_type == "image"
+  end
+
+  def text?
+    self.file_type == "text"
+  end
+
+  def audio?
+    self.file_type == "audio"
+  end
+
   protected
 
   def set_name_and_properties
