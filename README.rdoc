@@ -4,15 +4,45 @@
 ToDo:
 =====
 
-1. Fix files to be allowed to be named anything (not like directories) - w/ spaces/etc
-2. more / less command
-3. Figure out hosting / directory structure
+Refactor:
+1. add SessionInfo model
+2. finish shell refactor
+3. update views to listen to lines and history
+4. 
+
+Then:
+
+2. Add in simple editor (simple file model to load and save)
+3. Figure out hosting / directory structure - .domain file
 4. Tab completion
 5. up / down for history
 6. mv command
 7. cp command
 8. public / private directories
 9. Add bing search api + JSON awk-type extractor
+
+
+Code Separation:
+Ensure All JS Models work on Node.js & keeps all the business logic in the models and away from the views. Entire system should be runnable from JS console.
+
+Move all top level functions to Shell model, e.g.: 
+Shell.run("cd tester",callback);
+Shell.runCommand("cd", "tester",callback);
+
+Create Jasmine tests for the models
+
+Should update the command history collection
+
+Begin be
+
+JAWK 
+
+{ result: [ { a: "b" }, { a: "c" } ] } -> ["b", "c" ]
+
+cmd | { var k = $input.result; k } | {{ $input.a }}   
+
+
+
 
 pipe pipes the actual JSON around - use JS to extract
 

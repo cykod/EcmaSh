@@ -1,6 +1,7 @@
 ;(function(EcmaSh) {
 
   EcmaSh.commands = {};
+  EcmaSh.aliases = { cat: "show" };
 
   EcmaSh.Command = Backbone.Model.extend({
 
@@ -34,6 +35,7 @@
   });
 
   EcmaSh.Command.run = function(name,context,args) {
+    name = EcmaSh.aliases[name] || name;
     var commandClass = EcmaSh.commands[name] || EcmaSh.Command;
     return new commandClass(args,{ type: name, context: context });
   }

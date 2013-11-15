@@ -1,7 +1,11 @@
 <div class='shell' id='shell1'></div>
 
 <script>
-  new EcmaSh.Shell({ }, { el: $("#shell1") });
+  (function() {
+    var sessionInfo = new EcmaSh.SessionInfo();
+    var shell = new EcmaSh.Shell({}, { session: sessionInfo });
+    new EcmaSh.ShellView({ el: $("$shell1"), model: shell }).render();
+  }());
 </script>
 
   

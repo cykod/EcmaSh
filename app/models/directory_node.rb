@@ -4,6 +4,8 @@ class DirectoryNode < Node
 
   after_save  :update_children_path
 
+  validates :name, format: { with:  /\A[a-zA-Z\-._0-9]+\z/ }, uniqueness: { scope:  :parent_id }
+
   def self.home_node
     self.fetch("/home") || self.create(name: "home")
   end

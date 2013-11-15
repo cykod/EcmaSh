@@ -6,6 +6,8 @@ class FileNode < Node
 
   has_one :file_node_content
 
+  validates :name, format: { with:  /\A[^\n\t\/]+\z/ }, uniqueness: { scope:  :parent_id }
+
   def has_content?; self.file_node_content.present?; end
 
   def content

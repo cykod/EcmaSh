@@ -25,6 +25,15 @@ EcmaSh.BaseView = Backbone.View.extend({
     } else {
       return false;
     }
+  },
+
+  pressedTab: function(e) {
+    if(e.which == 9 && !e.shiftKey) {
+      e.preventDefault();
+      return true;
+    } else {
+      return false;
+    }
   }
 
 

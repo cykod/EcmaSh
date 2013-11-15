@@ -12,6 +12,8 @@
     },
 
     initialize: function() {
+      this.collection = this.model.history;
+
       if(this.model.user.get("api_key")) {
         this.commandPrompt = new EcmaSh.PromptView({ model: this.model, collection: this.collection });
       } else {

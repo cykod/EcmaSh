@@ -10,7 +10,6 @@ class Node < ActiveRecord::Base
 
   def directory?; false; end
 
-  validates :name, format: { with:  /\A[a-zA-Z\-._0-9]+\z/ }, uniqueness: { scope:  :parent_id }
 
   PUBLIC = 1   # anyone can list directory
   PRIVATE = 2  # anyone can view files in directory

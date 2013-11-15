@@ -5,7 +5,7 @@
     className: "line",
 
     events: {
-      "keyup .prompt": "checkSubmit",
+      "keydown .prompt": "checkSubmit",
       "click": "focusPrompt"
     },
 
@@ -39,35 +39,34 @@
     },
 
     checkSubmit: function(e) {
-      var self = this;
 
-      if(e.which == 13 && !e.shiftKey) {
-        e.preventDefault();
+      if(this.pressedEnter(e)) { 
+        this.runCommand();
+      } else if(this.pressedTab(e)) {
 
-        var command = this.$(".prompt").text().trim();
-        var argv = command.split(" ");
-        var name = argv.shift();
-
-        var command = EcmaSh.Command.run(name, this.model, { 
-          promptLine: this.promptLine(),
-          command: command,
-          argv: argv, 
-        });
-
-        this.$el.hide();
-
-        this.collection.add(command);
-
-        command.run(function() {
-          self.$el.show();
-          self.render();
-          self.focusPrompt();
-        });
-        
       }
 
+    },
+
+    runCommand: function() {
+      var self = this;
+      var commandLine = this.$(".prompt").text().trim();
+
+      this.model.runLine(this.promptLine().commandLine);
+      
+
+
+      this.$el.hide();
+
+      this.collection.add(command);
+
+      command.run(function() {
+        self.$el.show();
+        self.render();
+        self.focusPrompt();
+      });
     }
   });
 
 
-}(EcmaSh));
+}(EcmaSh)); 
