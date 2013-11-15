@@ -2,9 +2,9 @@
 
 <script>
   (function() {
-    var sessionInfo = new EcmaSh.SessionInfo();
-    var shell = new EcmaSh.Shell({}, { session: sessionInfo });
-    new EcmaSh.ShellView({ el: $("$shell1"), model: shell }).render();
+    var session = new EcmaSh.Session();
+    var shell = new EcmaSh.Shell({}, { session: session });
+    new EcmaSh.ShellView({ el: $("#shell1"), model: shell }).render();
   }());
 </script>
 

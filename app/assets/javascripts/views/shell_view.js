@@ -24,6 +24,13 @@
       this.model.user.on("change:api_key",this.loggedIn,this);
 
       this.collection.on("add",this.addToHistory,this);
+      this.collection.on("done",this.showPrompt,this);
+    },
+
+    showPrompt: function() {
+      if(this.commandPrompt.showPrompt) {
+        this.commandPrompt.showPrompt();
+      }
     },
 
     checkUser: function(user) {
@@ -64,7 +71,7 @@
     },
 
     addToHistory: function(model) {
-      if(model instanceof EcmaSh.Command) {
+      if(model instanceof EcmaSh.CommandLine) {
         this.addHistoryView(new EcmaSh.CommandView({ model: model }));
       } else if(model instanceof EcmaSh.Error) {
         this.addHistoryView(new EcmaSh.ErrorView({ model: model }));

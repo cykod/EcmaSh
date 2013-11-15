@@ -52,19 +52,15 @@
       var self = this;
       var commandLine = this.$(".prompt").text().trim();
 
-      this.model.runLine(this.promptLine().commandLine);
-      
-
-
       this.$el.hide();
+      this.model.runLine(this.promptLine(),commandLine);
+      
+    },
 
-      this.collection.add(command);
-
-      command.run(function() {
-        self.$el.show();
-        self.render();
-        self.focusPrompt();
-      });
+    showPrompt: function() {
+      this.$el.show();
+      this.render();
+      this.focusPrompt();
     }
   });
 

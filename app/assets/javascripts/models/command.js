@@ -14,22 +14,21 @@
       return "/commands/" + this.type
     },
 
-    run: function(callback) {
+    run: function() {
       var self = this;
       var data = { argv: this.get("argv"), context: this.context.toJSON(), token: this.context.user.get("api_key")};
 
       this.save({}, {
         success: function() { 
           self.trigger("ran", self);
-          if(callback) callback();
         },
         error: function(model,xhr) { 
           var error = xhr.responseJSON && xhr.responseJSON.error ? xhr.responseJSON.error : "Unknown Error";
           self.set("error",error);
-          if(callback) callback();
         },
         data: $.param(data)
       });
+      return this;
     }
 
   });
@@ -37,7 +36,7 @@
   EcmaSh.Command.run = function(name,context,args) {
     name = EcmaSh.aliases[name] || name;
     var commandClass = EcmaSh.commands[name] || EcmaSh.Command;
-    return new commandClass(args,{ type: name, context: context });
+    return new commandClass(args,{ type: name, context: context }).run();
   }
 
   EcmaSh.CdCommand = EcmaSh.Command.extend({
