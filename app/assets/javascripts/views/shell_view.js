@@ -99,12 +99,9 @@
       e.preventDefault();
       var files = e.originalEvent.dataTransfer.files;
 
-      var command = EcmaSh.Command.run("upload", this.model, { 
-        argv: files
-      });
-
-      this.collection.add(command);
-      command.run();
+      var command = this.model.runCommand("upload",files);
+      var line = "Uploading " + files.length + " files to " + this.model.get("CWD");
+      this.model.addToHistory(line,"",command);
     }
   });
 

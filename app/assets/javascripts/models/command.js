@@ -36,7 +36,9 @@
   EcmaSh.Command.run = function(name,context,args) {
     name = EcmaSh.aliases[name] || name;
     var commandClass = EcmaSh.commands[name] || EcmaSh.Command;
-    return new commandClass(args,{ type: name, context: context }).run();
+    var command = new commandClass(args,{ type: name, context: context });
+    command.run();
+    return command;
   }
 
   EcmaSh.CdCommand = EcmaSh.Command.extend({

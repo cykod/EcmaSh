@@ -11,6 +11,11 @@
       this.history = new EcmaSh.History();
     },
 
+    addToHistory: function(promptLine,input,command) {
+      this.history.add(new EcmaSh.CommandLine({ promptLine: promptLine, input: input}, { command: command }));
+
+    },
+
     runLine: function(promptLine, input) {
 
       // Split out into multiple commands (via split on ;, | )
@@ -20,7 +25,7 @@
       var command = this.runCommand(name,argv);
 
       // Add the command line history
-      this.history.add(new EcmaSh.CommandLine({ promptLine: promptLine, input: input}, { command: command }));
+      this.addToHistory(promptLine,input,command);
     },
 
     runCommand: function(name,argv) {
