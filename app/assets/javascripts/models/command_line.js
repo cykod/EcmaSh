@@ -8,10 +8,11 @@
       var self = this;
       this.command.on("error",function() { 
         self.trigger("error",self); 
+        self.collection.addError(self.command);
       });
       this.command.on("ran",function() { 
         self.trigger("ran",self);
-        self.collection.add(new EcmaSh.Result(self.command.get("result")));
+        self.collection.addResult(self.command);
       });
     }
 
