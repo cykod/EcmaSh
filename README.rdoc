@@ -4,12 +4,6 @@
 ToDo:
 =====
 
-Refactor:
-1. add SessionInfo model
-2. finish shell refactor
-3. update views to listen to lines and history
-4. 
-
 Then:
 
 2. Add in simple editor (simple file model to load and save)

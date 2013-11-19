@@ -10,6 +10,7 @@ class NodeJSON < JSONBase
 
   def details
     build do |json,node|
+      json.id node.fullpath
       json.fullpath node.fullpath
       json.name node.name
       json.directory node.directory?

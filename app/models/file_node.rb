@@ -15,6 +15,12 @@ class FileNode < Node
       self.file_node_content.content
     end
   end
+  
+  def content=(val)
+    if self.file_node_content 
+      self.file_node_content.update_attributes(content: val)
+    end
+  end
 
   def content_type
     self.has_content? ? self.file_node_content.content_type : self.file_content_type

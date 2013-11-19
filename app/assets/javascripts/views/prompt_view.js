@@ -54,7 +54,6 @@
 
       this.$el.hide();
       this.model.runLine(this.promptLine(),commandLine);
-      
     },
 
     showPrompt: function() {

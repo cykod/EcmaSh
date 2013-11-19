@@ -31,6 +31,19 @@ class FilesController < ApplicationController
     end
   end
 
+  def put
+    node = Node.fetch("/home/" + params[:directory].to_s)
+
+    access = Access.new(current_user_id)
+
+    if access.read?(node) && !node.directory?
+      node.content = params[:content]
+      render nothing: true, status: :accepted
+    else
+      return render nothing: true, status: 404
+    end
+  end
+
   protected
 
   def context_args

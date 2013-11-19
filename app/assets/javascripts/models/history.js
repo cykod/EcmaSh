@@ -8,7 +8,8 @@
       this.add(
         new EcmaSh.Result({ 
           result: model.get("result"), 
-          type: model.type 
+          type: model.type,
+          as: model.get("as")
         })
       );
       this.trigger("done");

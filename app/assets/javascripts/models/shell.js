@@ -26,11 +26,12 @@
 
       // Add the command line history
       this.addToHistory(promptLine,input,command);
+      return command;
     },
 
     runCommand: function(name,argv) {
       var command = EcmaSh.Command.run(name, this, { 
-        command: command,
+        command: name,
         argv: argv
       });
       return command;

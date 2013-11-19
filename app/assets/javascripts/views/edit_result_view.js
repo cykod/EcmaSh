@@ -1,0 +1,17 @@
+(function(EcmaSh) {
+
+  EcmaSh.EditResultView = EcmaSh.BaseView.extend({
+    initialize: function() {
+    },
+
+    render: function() {
+      var file = new EcmaSh.File(this.model.get("result"));
+      this.editorView = new EcmaSh.EditorView({ model: file });
+      $("body").append(this.editorView.el);
+      this.editorView.render();
+      return this;
+    }
+  });
+
+
+}(EcmaSh));

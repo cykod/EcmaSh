@@ -76,7 +76,9 @@
       } else if(model instanceof EcmaSh.Error) {
         this.addHistoryView(new EcmaSh.ErrorView({ model: model }));
       } else if(model instanceof EcmaSh.Result) {
-        this.addHistoryView(new EcmaSh.ResultView({ model: model }));
+        var ResultView = EcmaSh[ _.capitalize(model.get("as")) + "ResultView" ] ||
+                         EcmaSh.ResultView;
+        this.addHistoryView(new ResultView({ model: model }));
       }
 
       this.el.scrollTop = this.el.scrollHeight;
