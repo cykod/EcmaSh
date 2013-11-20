@@ -26,6 +26,10 @@ class FileNode < Node
     self.has_content? ? self.file_node_content.content_type : self.file_content_type
   end
 
+  def content_subtype
+    self.content_type.split("/")[1]
+  end
+
   def image?
     self.file_type == "image"
   end

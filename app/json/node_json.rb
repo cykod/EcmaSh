@@ -16,6 +16,7 @@ class NodeJSON < JSONBase
       json.directory node.directory?
       json.src node.file(:original)
       json.file_type node.file_type
+      json.file_subtype node.content_subtype
       json.image node.image?
       json.text node.text?
       json.audio node.audio?

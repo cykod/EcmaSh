@@ -1,7 +1,7 @@
 ;(function(EcmaSh) {
 
   EcmaSh.commands = {};
-  EcmaSh.aliases = { cat: "show", edit: "show" };
+  EcmaSh.aliases = { cat: "show", vi: "edit", more: "show", less: "show" };
 
   EcmaSh.Command = Backbone.Model.extend({
 

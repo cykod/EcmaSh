@@ -8,23 +8,40 @@
 
     render: function() {
       var self = this,
-          file = this.model;
-      CodeMirror.commands.save = function(obj,some){ 
+          file = this.model,
+          editor = file.get("as"),
+          keyMap = null;
+
+      CodeMirror.Vim.defineEx("quit","q",function() {
+        self.remove();
+      });
+
+      CodeMirror.commands.save = function(obj){ 
         file.save({ content: obj.doc.getValue() });
       };
 
-      CodeMirror.commands.wq = function(obj) {
+      CodeMirror.Vim.defineEx("wquit","wq",function(obj) {
         file.save({ content: obj.doc.getValue() });
         self.remove();
-      };
-      this.editor = CodeMirror(this.el, {
+      });
+
+      var options = {
         value: this.model.get("content"),
         lineWrapping: true,
         lineNumbers: true,
         autoFocus: true,
-        mode:  "javascript",
-        keyMap: "vim"
-      });
+        mode:  this.model.get("file_subtype")
+      }
+
+      if(editor == "vi" || editor == "vim") {
+        options.keyMap = "vim"
+      }
+
+      this.editor = CodeMirror(this.el, options );
+
+      setTimeout(function() {
+        self.editor.focus();
+      },10);
     }
   });
 

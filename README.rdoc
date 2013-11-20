@@ -1,12 +1,19 @@
 == README
 
+Editor:
+=======
+
+normal mode - save and quit
+track dirty?
+theme
+syntax highlighting
+
 
 ToDo:
 =====
 
 Then:
 
-2. Add in simple editor (simple file model to load and save)
 3. Figure out hosting / directory structure - .domain file
 4. Tab completion
 5. up / down for history
