@@ -22,6 +22,7 @@
                                                     
       this.model.user.on("change:state",this.checkUser,this);
       this.model.user.on("change:api_key",this.loggedIn,this);
+      this.model.on("logout",this.logout,this);
 
       this.collection.on("add",this.addToHistory,this);
       this.collection.on("done",this.showPrompt,this);
@@ -46,11 +47,18 @@
       var api_key = user.get("api_key");
       if(api_key) {
         this.model.set("CWD","/home/" + user.get("username"));
-        this.model.cookie();
+        this.model.remember();
         this.commandPrompt = new EcmaSh.PromptView({ model: this.model, collection: this.collection });
         this.$el.append(this.commandPrompt.el);
         this.commandPrompt.render();
       }
+    },
+
+    logout: function() {
+      this.$el.empty();
+      this.commandPrompt = new EcmaSh.LoginView({ model: this.model.user});
+      this.$el.append(this.commandPrompt.el);
+      this.commandPrompt.render();
     },
 
     focusPrompt: function(e) {
@@ -67,7 +75,8 @@
     },
 
     addHistoryView: function(view) {
-      this.commandPrompt.$el.before(view.render().el);
+      this.commandPrompt.$el.before(view.el);
+      view.render();
     },
 
     addToHistory: function(model) {

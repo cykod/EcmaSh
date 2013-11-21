@@ -1,6 +1,6 @@
 EcmaSh::Application.routes.draw do
 
-  resources :sessions, only: [ :create, :delete ]
+  resource :sessions, only: [ :create, :destroy]
   resources :registrations, only: [ :create, :show ]
 
   #get "/commands" - history

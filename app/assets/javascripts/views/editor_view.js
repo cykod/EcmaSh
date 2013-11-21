@@ -13,6 +13,7 @@
           keyMap = null;
 
       CodeMirror.Vim.defineEx("quit","q",function() {
+        self.focusPrompt();
         self.remove();
       });
 
@@ -22,6 +23,7 @@
 
       CodeMirror.Vim.defineEx("wquit","wq",function(obj) {
         file.save({ content: obj.doc.getValue() });
+        self.focusPrompt();
         self.remove();
       });
 

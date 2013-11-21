@@ -18,7 +18,11 @@ class User < ActiveRecord::Base
   end
 
   def generate_key(valid_until=nil)
-    self.user_keys.create(valid_until: valid_until || (Time.now+2.weeks)).token
+    self.user_keys.create(valid_until: valid_until || (Time.now+2.weeks))
+  end
+
+  def destroy_key(token)
+    self.user_keys.where(token: token).destroy_all
   end
 
 end

@@ -34,6 +34,13 @@ EcmaSh.BaseView = Backbone.View.extend({
     } else {
       return false;
     }
+  },
+
+  focusPrompt: function() {
+    var $prompt = this.$el.parents(".shell").find(".prompt");
+    setTimeout(function() {
+     $prompt.focus();
+    },10);
   }
 
 

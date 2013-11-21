@@ -17,6 +17,12 @@
     save: function(env,user) {
       localStorage["ecma_env"] = JSON.stringify(env.toJSON());
       localStorage["ecma_user"] = JSON.stringify(user.toJSON());
+    },
+
+    clear: function() {
+      delete localStorage["ecma_env"];
+      delete localStorage["ecma_user"];
+      Backbone.Model.prototype.clear.apply(this);
     }
 
   });

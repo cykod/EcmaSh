@@ -4,6 +4,10 @@ $green: rgb(166,227,45);
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
  }
 
+ a {
+  color:$green;
+ }
+
 html, body { 
   height:100%;
 }

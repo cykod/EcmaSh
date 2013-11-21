@@ -9,6 +9,13 @@
       this.user = new EcmaSh.User(this.session.get("user"));
 
       this.history = new EcmaSh.History();
+
+      this.on("logout",this.session.clear,this.session);
+      this.on("logout",this.user.clear,this.user);
+    },
+
+    remember: function() {
+      this.session.save(this,this.user);
     },
 
     addToHistory: function(promptLine,input,command) {

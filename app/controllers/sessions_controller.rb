@@ -11,10 +11,21 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user
+      current_user.destroy_key(logout_param[:token])
+    end
+    render json: { status: "none" }, status: :ok
+  end
+
 
   protected
 
   def session_params
     params.permit(:username,:password)
+  end
+
+  def logout_param
+    params.permit(:token)
   end
 end

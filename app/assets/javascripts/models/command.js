@@ -1,7 +1,7 @@
 ;(function(EcmaSh) {
 
   EcmaSh.commands = {};
-  EcmaSh.aliases = { cat: "show", vi: "edit", more: "show", less: "show" };
+  EcmaSh.aliases = { cat: "show", vi: "edit", more: "show", less: "show", exit: 'logout' };
 
   EcmaSh.Command = Backbone.Model.extend({
 
@@ -55,11 +55,8 @@
   });
 
   EcmaSh.UploadCommand = EcmaSh.Command.extend({
-    initialize: function(attributes,options) {
-      EcmaSh.Command.prototype.initialize.call(this,attributes,options);
-    },
 
-    run: function(callback) {
+    run: function() {
       var self = this;
 
       var formdata = new FormData();
@@ -75,7 +72,6 @@
         contentType: false,  
         success: function() { 
           self.trigger("ran", self);
-          if(callback) callback();
         },
         error: function(model,xhr) { 
           var error = xhr.responseJSON && xhr.responseJSON.error ? xhr.responseJSON.error : "Unknown Error";
@@ -86,6 +82,24 @@
     }
   });
 
+
+  EcmaSh.LogoutCommand = EcmaSh.Command.extend({
+    initialize: function(attributes,options) {
+      EcmaSh.Command.prototype.initialize.call(this,attributes,options);
+    },
+
+    run: function() {
+      var self = this;
+      this.context.user.destroy({ success: function() {
+          self.context.trigger("logout");
+        },
+        data: $.param({ token: this.context.user.get("api_key") })
+      });
+    }
+
+  });
+
+  EcmaSh.commands['logout'] = EcmaSh.LogoutCommand;
   EcmaSh.commands['cd'] = EcmaSh.CdCommand;
   EcmaSh.commands['upload'] = EcmaSh.UploadCommand;
 

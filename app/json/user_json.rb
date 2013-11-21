@@ -2,8 +2,10 @@ class UserJSON < JSONBase
 
   def new_session
     build do |json,user|
+      session_key = user.generate_key
+      json.id session_key.id
       json.username user.username
-      json.api_key user.generate_key
+      json.api_key session_key.token
     end
   end
 
