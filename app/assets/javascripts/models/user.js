@@ -4,7 +4,7 @@
 
 
     url: function() {
-      if(this.get("state")) {
+      if(this.get("state") && !this.get("api_key")) {
        return "/registrations"
       } else {
        return "/sessions"

@@ -7,40 +7,45 @@ normal mode - save and quit
 track dirty?
 theme
 syntax highlighting
+should be able to create a new file.
 
 
 ToDo:
 =====
+
+
+6. mv command
+7. cp command
+parsing options (-r)
+
+
 
 Then:
 
 3. Figure out hosting / directory structure - .domain file
 4. Tab completion
 5. up / down for history
-6. mv command
-7. cp command
 8. public / private directories
 9. Add bing search api + JSON awk-type extractor
 
 
-Code Separation:
-Ensure All JS Models work on Node.js & keeps all the business logic in the models and away from the views. Entire system should be runnable from JS console.
-
-Move all top level functions to Shell model, e.g.: 
-Shell.run("cd tester",callback);
-Shell.runCommand("cd", "tester",callback);
-
 Create Jasmine tests for the models
 
-Should update the command history collection
-
-Begin be
 
 JAWK 
 
 { result: [ { a: "b" }, { a: "c" } ] } -> ["b", "c" ]
 
-cmd | { var k = $input.result; k } | {{ $input.a }}   
+cmd | pluck $$.result | map [ $$.a ] -> [ [ "b" ], [ "c" ]]
+
+
+
+[ [ 0, 1, { a: 7 } ], [ 2, 4, { a: 8 } ] ] 
+
+-> 1,4
+
+cmd | map $$[2].a >> test.json
+
 
 
 
