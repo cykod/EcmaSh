@@ -38,4 +38,28 @@ describe SessionsController do
       end
     end
   end
+
+  describe "#destroy" do
+
+    let!(:user) { create :user }
+
+    context "invalid credentials" do
+
+      it "does nothing" do
+        delete :destroy, token: "fdasfa"
+        response.status.should == 200
+      end
+    end
+
+    context "valid credentials" do
+
+      it "destroys the key" do
+        token = user.generate_token
+        expect { 
+          delete :destroy, token: token
+        }.to change { UserKey.count }.by(-1)
+      end
+    end
+
+  end
 end

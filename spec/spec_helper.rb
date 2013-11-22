@@ -29,7 +29,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   def sign_in(user)
-    @request.cookies['token'] = user.generate_key
+    @request.cookies['token'] = user.generate_token
   end
   
 

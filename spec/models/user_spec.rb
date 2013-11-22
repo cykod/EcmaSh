@@ -21,16 +21,23 @@ describe User do
   
 
   describe "#generate_key" do
-
     let!(:user) { create :user }
   
     it "creates a new user key" do
-
       expect { user.generate_key }.to change { UserKey.count }.by(1)
     end
 
   end
   
+
+  describe "#destroy_key" do
+    let!(:user) { create :user }
+
+    it "destroys a key by token" do
+      token = user.generate_token
+      expect { user.destroy_key(token) }.to change { UserKey.count }.by(-1)
+    end
+  end
 
 
 

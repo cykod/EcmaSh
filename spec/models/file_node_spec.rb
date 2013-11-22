@@ -40,6 +40,14 @@ describe FileNode do
       text_file.content_type.should == "text/plain"
     end
 
+    describe "#content=" do
+
+      it "update the content model" do
+        text_file.content = "This is the content"
+        text_file.save
+        text_file.reload.content.should == "This is the content"
+      end
+    end
   end
 end
 

@@ -16,7 +16,7 @@ EcmaSh::Application.routes.draw do
   #get "/bin/*filepath"
 
   post "/home/*directory" => "files#create", as: :create_file, format: false
-  put "/home/*directory" => "files#put", as: :update_file, format: false
+  put "/home/*directory" => "files#update", as: :update_file, format: false
   get "/home/*directory" => "files#show", as: :file, format: false
   root to: "shells#new"
 end

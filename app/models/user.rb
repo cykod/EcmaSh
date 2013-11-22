@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
     @access ||= Access.new(self)
   end
 
+  def generate_token
+    self.generate_key.token
+  end
+
   def generate_key(valid_until=nil)
     self.user_keys.create(valid_until: valid_until || (Time.now+2.weeks))
   end

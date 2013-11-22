@@ -27,9 +27,7 @@ describe FilesController do
   end
 
   describe "#show" do
-
     let(:directory) { create :directory_node, name: "tester", user: user, parent: DirectoryNode.home_node }
-
 
     let(:image_file) { FileNode.create(file: fixture_file_upload("images/rails.png","image/png"), parent: directory) }
     let(:text_file) { FileNode.create(file: fixture_file_upload("text/sample_file.txt", "text/plain"), parent: directory ) }
@@ -52,5 +50,31 @@ describe FilesController do
       get :show, directory: "tester/sample_file.txt"
       response.body.should include("emergency broadcast system")
     end
+  end
+
+  describe "#put" do
+    let(:directory) { create :directory_node, name: "tester", user: user, parent: DirectoryNode.home_node }
+
+    let(:image_file) { FileNode.create(file: fixture_file_upload("images/rails.png","image/png"), parent: directory) }
+    let(:text_file) { FileNode.create(file: fixture_file_upload("text/sample_file.txt", "text/plain"), parent: directory ) }
+
+    it "renders a 404 if putting an invalid file" do
+      put  :update, directory: "testeramamama"
+      response.status.should == 404
+    end
+
+    it "renders a 404 if putting a image file" do
+      image_file
+      put  :update, directory: "tester/rails.png"
+      response.status.should == 404
+    end
+
+    it "updates the file if it's a valid file" do
+      text_file
+      put :update, directory: "tester/sample_file.txt", content: "Here's the content"
+      response.status.should == 202
+      text_file.reload.content.should == "Here's the content"
+    end
+
   end
 end

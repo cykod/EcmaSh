@@ -31,13 +31,13 @@ class FilesController < ApplicationController
     end
   end
 
-  def put
+  def update
     node = Node.fetch("/home/" + params[:directory].to_s)
 
     access = Access.new(current_user_id)
 
-    if access.read?(node) && !node.directory?
-      node.content = params[:content]
+    if access.read?(node) && !node.directory? && node.text?
+      node.content = params[:content].to_s
       render nothing: true, status: :accepted
     else
       return render nothing: true, status: 404
