@@ -29,6 +29,11 @@ describe RegistrationsController do
       json_body['error'].should_not be_nil
     end
 
+    it "returns an error if the username starts with guest" do
+      post :create, username: "guest12443", password: 'tester'
+      json_body['error'].should_not be_nil
+    end
+
     it "returns a valid user with a valid login" do
       post :create, username: "tester", password: "tester"
       json_body['api_key'].should_not be_nil

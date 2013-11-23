@@ -36,7 +36,7 @@
 
     checkUser: function(user) {
       var state = user.get("state");
-      if(state == 'guest' || state == 'register') {
+      if(state == 'register') {
         this.commandPrompt = new EcmaSh.RegisterView({ model: user });
         this.$el.append(this.commandPrompt.el);
         this.commandPrompt.render();

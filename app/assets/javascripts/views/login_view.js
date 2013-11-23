@@ -37,7 +37,10 @@
     hasPassword: function() { return this.model.get("password"); },
 
     setUsername: function(value) {
-      if(value == 'guest' || value == 'register') {
+      if(value == 'guest') {
+        this.model.set({ state: value });
+        this.model.registerGuest();
+      } else if(value == 'register') {
         this.model.set({ state: value });
       } else {
         this.model.set("username",value);

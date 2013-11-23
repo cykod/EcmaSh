@@ -13,7 +13,7 @@ class Registration
   def register!
     return false unless self.valid?
     user = User.create({ username: username, password: password, email: email })
-    DirectoryNode.create(name: user.username, parent: DirectoryNode.home_node, user: user)
+    user.setup_user_directory
     user
   end
 

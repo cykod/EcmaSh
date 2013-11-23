@@ -29,4 +29,8 @@ class User < ActiveRecord::Base
     self.user_keys.where(token: token).destroy_all
   end
 
+  def setup_user_directory
+    DirectoryNode.create(name: self.username, parent: DirectoryNode.home_node, user: self)
+  end
+
 end

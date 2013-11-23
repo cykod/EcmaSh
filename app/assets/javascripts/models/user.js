@@ -5,7 +5,11 @@
 
     url: function() {
       if(this.get("state") && !this.get("api_key")) {
-       return "/registrations"
+        if(this.get("username") == "guest") {
+          return "/guests"
+        } else {
+          return "/registrations"
+        }
       } else {
        return "/sessions"
       }
@@ -19,6 +23,12 @@
         self.set({ "error": data["error"] });
         callback(self);
       });
+    },
+
+    registerGuest: function() {
+      this.set("username","guest")
+      this.set("guest",true)
+      this.save();
     }
   });
 

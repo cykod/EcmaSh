@@ -4,6 +4,10 @@
 {{/if}}
 {{#if state}}
   {{line "login:" state}}
+  {{#if guest}}
+  <div class='line'>Guest account created, will be deleted in 24 hours.</div>
+  <div class='line'>Try "help" or "why" to get started.</div>
+  {{/if}}
 {{else}}
 
   {{line "login:" username}}
