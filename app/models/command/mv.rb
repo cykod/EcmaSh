@@ -6,8 +6,7 @@ class Command::Mv < ::Command
     destination_node_path = resolve_path(argv[1] || ".")
     destination_node = Node.fetch(destination_node_path)
 
-    raise InvalidFileError.new(node_path) unless access.read?(source_node) && (!destination_node || 
-
+    raise InvalidFileError.new(node_path) unless access.read?(source_node)
     nodes = node.directory? ? node.children : [ node ]
 
     output!(NodeJSON.new(nodes).list_hash)
