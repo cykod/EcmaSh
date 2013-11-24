@@ -5,6 +5,7 @@ class Command::Edit < ::Command
     node = Node.fetch(node_path)
 
     raise InvalidFileError.new(argv[0]) unless access.write?(node) && !node.directory?
+    raise InvalidFileError.new(argv[0]) unless node.text?
 
     output!(NodeJSON.new(node).details_hash)
   end

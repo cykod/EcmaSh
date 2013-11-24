@@ -56,6 +56,15 @@ class Command < ActiveRecord::Base
     join_path resolve_path_parts(path)
   end
 
+  def resolve_directory_and_file(path)
+    parts = resolve_path_parts(path)
+    if path[-1] == "/"
+      return join_path(parts),""
+    else
+      return join_path(parts[0..-2]),parts[-1]
+    end
+  end
+
   def join_path(path_parts)
     "/" + path_parts.join("/")
   end

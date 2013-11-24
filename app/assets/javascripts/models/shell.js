@@ -36,11 +36,15 @@
       return command;
     },
 
-    runCommand: function(name,argv) {
+    runCommand: function(name,argv,callback) {
       var command = EcmaSh.Command.run(name, this, { 
         command: name,
         argv: argv
       });
+      if(callback) { 
+        command.on("ran",callback);
+        command.on("error",callback);
+      }
       return command;
     }
   });

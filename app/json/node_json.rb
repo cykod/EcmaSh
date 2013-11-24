@@ -8,6 +8,12 @@ class NodeJSON < JSONBase
     end
   end
 
+  def names
+    build do |json,node|
+      json.name node.name
+    end
+  end
+
   def details
     build do |json,node|
       json.id node.fullpath

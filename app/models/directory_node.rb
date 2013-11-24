@@ -12,6 +12,10 @@ class DirectoryNode < Node
     
   def directory?; true; end
 
+  def autocomplete_children(name)
+    self.children.where("name LIKE ?",name.to_s + "%")
+  end
+
   def download(url)
     file = URI.parse(url)
 

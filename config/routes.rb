@@ -13,7 +13,6 @@ EcmaSh::Application.routes.draw do
   #get "/man/:id"
 
   
-  #get "/home/*filepath"
   #get "/bin/*filepath"
 
   post "/home/*directory" => "files#create", as: :create_file, format: false

@@ -45,5 +45,35 @@ describe Command do
       base_context_cmd.resolve_path("./svender").should == "/home/tester/svender"
     end
   end
+  
+  describe "#resolve_directory_and_file" do
+
+    let(:no_context_cmd) { Command.new(context: {}) }
+    let(:base_context_cmd) { Command.new(context: { "CWD" =>  "/home/tester" }) }
+
+    it "returns a directory and file separately" do
+      dir, file = no_context_cmd.resolve_directory_and_file("/tester/rama")
+      dir.should == '/tester'
+      file.should == 'rama'
+    end
+
+    it "handles relative paths" do
+      dir, file = no_context_cmd.resolve_directory_and_file("/tester/../something/rama")
+      dir.should == '/something'
+      file.should == 'rama'
+    end
+
+    it "handles relative paths" do
+      dir, file = no_context_cmd.resolve_directory_and_file("/tester/../something/rama")
+      dir.should == '/something'
+      file.should == 'rama'
+    end
+
+    it "handles relative paths with context" do
+      dir, file = base_context_cmd.resolve_directory_and_file("../something/here-is-a-file.txt")
+      dir.should == '/home/something'
+      file.should == 'here-is-a-file.txt'
+    end
+  end
 
 end
