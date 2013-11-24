@@ -8,6 +8,7 @@
     initialize: function(attributes,options) {
       this.type = this.type || options.type
       this.context = options.context;
+      //
     },
 
     url: function() {
