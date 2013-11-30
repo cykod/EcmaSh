@@ -10,7 +10,6 @@ gem 'pg'
 gem 'aws-sdk'
 gem 'paperclip'
 gem "dotenv-rails"
-# gem "puma"
 gem "handlebars_assets"
 gem 'jbuilder', '~> 1.2'
 gem "rack-zippy"

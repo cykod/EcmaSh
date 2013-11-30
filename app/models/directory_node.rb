@@ -7,7 +7,7 @@ class DirectoryNode < Node
   validates :name, format: { with:  /\A[a-zA-Z\-._0-9]+\z/ }, uniqueness: { scope:  :parent_id }
 
   def self.home_node
-    self.fetch("/home") || self.create(name: "home")
+    self.fetch("/home") || self.create(name: "home", lock_level: Node::SECRET)
   end
     
   def directory?; true; end

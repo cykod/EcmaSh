@@ -13,21 +13,22 @@ should be able to create a new file.
 ToDo:
 =====
 
+esh files that run a bunch of commands [ store commands in a list of lists - pick of one command, pipe and then do the next.
+
+add source command
+set ENV variables
 
 6. mv command
 7. cp command
 parsing options (-r)
-
-
-
-Then:
-
+multiple argumentsf
 3. Figure out hosting / directory structure - .domain file
-4. Tab completion
 5. up / down for history
 8. public / private directories
 9. Add bing search api + JSON awk-type extractor
+10. Deploy to digital ocean
 
+ecmash
 
 Create Jasmine tests for the models
 
@@ -154,5 +155,12 @@ ECMAsh.addCommand(ClientCommand.extend({
 
 });
 
+
+
+
+Features:
+Guest Login
+Registration
+LocalStorage based 
 
 

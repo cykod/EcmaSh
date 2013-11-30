@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   validates :password, presence: true, :on => :create
   validates :username, presence: true, uniqueness: true
 
-  has_many :commands
-  has_many :user_keys
+  has_many :commands, dependent: :delete_all
+  has_many :user_keys, dependent: :delete_all
 
   def self.login(username,password)
     return false if username.blank?
