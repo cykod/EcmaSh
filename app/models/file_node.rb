@@ -42,6 +42,16 @@ class FileNode < Node
     self.file_type == "audio"
   end
 
+  def copy(destination,file_name)
+    # handle content case
+    dest = URI.parse(self.file.url)
+    node = FileNode.new(parent: destination, file: dest)
+    node.file.instance_write(:file_name,file_name)
+    node.save && node
+  end
+
+
+
   protected
 
   def set_name_and_properties

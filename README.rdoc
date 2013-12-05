@@ -1,5 +1,13 @@
 == README
 
+1. Copy test
+2. Mv and cp tests
+3. Editor below
+4. Create file
+5. Source command
+6. Rip out paperclip
+7. Run command (esh files) (split by line)
+
 Editor:
 =======
 
@@ -18,8 +26,6 @@ esh files that run a bunch of commands [ store commands in a list of lists - pic
 add source command
 set ENV variables
 
-6. mv command
-7. cp command
 parsing options (-r)
 multiple argumentsf
 3. Figure out hosting / directory structure - .domain file

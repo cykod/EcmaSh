@@ -23,6 +23,8 @@ describe FileNode do
         image_file.height.should == 64
       end
     end
+
+    describe "#copy" 
   end
 
   context "text file" do
@@ -48,6 +50,10 @@ describe FileNode do
         text_file.reload.content.should == "This is the content"
       end
     end
+
+
+    describe "#copy" 
   end
+
 end
 

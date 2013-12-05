@@ -27,6 +27,10 @@ class NodeJSON < JSONBase
       json.text node.text?
       json.audio node.audio?
       json.content node.content
+      if node.image? 
+        json.width node.width
+        json.height node.height
+      end
     end
   end
 
