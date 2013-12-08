@@ -42,11 +42,20 @@ class FileNode < Node
     self.file_type == "audio"
   end
 
-  def copy(destination,file_name)
+  def copy(destination,file_name = nil)
+    file_name = self.name if file_name.blank?
     # handle content case
-    dest = URI.parse(self.file.url)
-    node = FileNode.new(parent: destination, file: dest)
-    node.file.instance_write(:file_name,file_name)
+    
+    if self.has_content? 
+      node = self.dup
+      node.attributes = { file_node_content: self.file_node_content.dup,
+                          name: file_name,
+                          parent: destination }
+    else
+      dest = self.file.url  =~ /^https?\:\/\// ? URI.parse(self.file.url) : File.open(self.file.path)
+      node = FileNode.new(parent: destination, file: dest, user: self.user)
+      node.file.instance_write(:file_name,file_name)
+    end
     node.save && node
   end
 

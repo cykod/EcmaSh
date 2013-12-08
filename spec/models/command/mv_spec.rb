@@ -16,15 +16,12 @@ describe Command::Mv  do
     let!(:subdir2) { create :directory_node, parent: dir, user: user, name: "DirB"  }
     let!(:file) { create :file_node, parent: dir, user: user }
 
-    it "moves files into existing directories"
-
-    it "moves directories into existing directories"
-
-    it "moves directories to new names"
-
-    it "moves files to new names"
-
-    it "updates the file on disk when it's moved"
+    it "mv files into existing directories" do
+      expect { 
+        result = run_mv_command(file.fullpath, subdir1.fullpath)
+        result[0]["fullpath"].should include(subdir1.fullpath)
+      }.to change { FileNode.count }.by(0)
+    end
 
   end
 end

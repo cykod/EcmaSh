@@ -24,7 +24,22 @@ describe FileNode do
       end
     end
 
-    describe "#copy" 
+    describe "#copy"  do
+      let(:directory) { create :directory_node, name: "tester" }
+      
+      it "copys the file over" do
+        image_file
+
+        expect {
+          result = image_file.copy(directory,"something.png")
+          result.file_file_name.should == "something.png"
+          result.file.url.should include("something.png")
+          result.parent.should == directory
+        }.to change { FileNode.count }.by(1)
+
+      end
+
+    end
   end
 
   context "text file" do
@@ -52,7 +67,22 @@ describe FileNode do
     end
 
 
-    describe "#copy" 
+    describe "#copy" do
+      let(:directory) { create :directory_node, name: "tester" }
+
+      it "copys the file and contents over" do
+        text_file
+
+        expect {
+          result = text_file.copy(directory,"somethinger.txt")
+          result.name.should == "somethinger.txt"
+          text_file.content.should == "This is a test of the emergency broadcast system.\n\nThis is only a test.\n"
+          result.parent.should == directory
+        }.to change { FileNode.count }.by(1)
+
+      end
+
+    end
   end
 
 end

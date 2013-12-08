@@ -16,6 +16,24 @@ class DirectoryNode < Node
     self.children.where("name LIKE ?",name.to_s + "%")
   end
 
+  def copy(destination,directory_name=nil)
+    directory_name = self.name if directory_name.blank?
+    # handle content case
+
+    node = DirectoryNode.create(name: directory_name,
+                               user: self.user,
+                               lock_level: self.lock_level,
+                               parent: destination)
+                               
+    return unless node.valid?
+    self.children.each do |child|
+      child.copy(node)
+    end
+    node
+  end
+
+
+
   def download(url)
     file = URI.parse(url)
 
