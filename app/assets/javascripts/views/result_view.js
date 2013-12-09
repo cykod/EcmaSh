@@ -5,8 +5,6 @@
     template: "result",
 
     initialize: function() {
-      console.log(this.model.get("result"));
-
       if(HandlebarsTemplates["result-" + this.model.get("type")]) {
         this.template = ["result-" + this.model.get("type")];
         this.custom = true;

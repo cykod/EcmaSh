@@ -40,11 +40,7 @@
       var command = EcmaSh.Command.run(name, this, { 
         command: name,
         argv: argv
-      });
-      if(callback) { 
-        command.on("ran",callback);
-        command.on("error",callback);
-      }
+      }, { callback: callback });
       return command;
     }
   });

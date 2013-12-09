@@ -30,15 +30,27 @@
         data: $.param(data)
       });
       return this;
-    }
+    },
 
+    // deferred trigger to let
+    // UI catch up
+    done: function() {
+      var self = this;
+      setTimeout(function() {
+        self.trigger("ran",self);
+      },1);
+    }
   });
 
-  EcmaSh.Command.run = function(name,context,args) {
+  EcmaSh.Command.run = function(name,context,args,options) {
     var commandName = EcmaSh.aliases[name] || name;
     var commandClass = EcmaSh.commands[commandName] || EcmaSh.Command;
     args["as"] = name;
     var command = new commandClass(args,{ type: commandName, context: context });
+    if(options && options.callback) {
+      command.on("ran",options.callback);
+      command.on("error",options.callback);
+    }
     command.run();
     return command;
   }
@@ -100,9 +112,28 @@
 
   });
 
+
+  EcmaSh.SourceCommand = EcmaSh.Command.extend({
+    initialize: function(attributes,options) {
+      EcmaSh.Command.prototype.initialize.call(this,attributes,options);
+    },
+
+
+    run: function() {
+
+      var url = EcmaSh.resolvePath(this.get("argv")[0],this.context.get("CWD")) + "?token=" + this.context.user.get("api_key");
+
+      this.set("result", {  path: url });
+      this.done();
+    }
+
+  });
+
+
   EcmaSh.commands['logout'] = EcmaSh.LogoutCommand;
   EcmaSh.commands['cd'] = EcmaSh.CdCommand;
   EcmaSh.commands['upload'] = EcmaSh.UploadCommand;
+  EcmaSh.commands['source'] = EcmaSh.SourceCommand;
 
   
 }(EcmaSh));

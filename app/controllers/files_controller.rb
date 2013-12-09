@@ -22,6 +22,7 @@ class FilesController < ApplicationController
       if node.directory?
         # show a listing
       elsif node.has_content?
+        headers["Access-Control-Allow-Origin"] = "*"
         send_data node.content, :type => node.content_type, :disposition => 'inline', name: node.name
       else
         redirect_to node.file(:original)
