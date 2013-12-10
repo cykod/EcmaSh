@@ -49,6 +49,10 @@
         if(this.pressedEnter(e)) { 
           this.$el.hide();
           this.prompt.runCommand(); 
+        } else if(this.pressedUp(e)) {
+          this.prompt.showHistory(-1);
+        } else if(this.pressedDown(e)) {
+          this.prompt.showHistory(1);
         }
       }
     },

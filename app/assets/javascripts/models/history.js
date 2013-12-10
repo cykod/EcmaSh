@@ -2,6 +2,16 @@
 
   EcmaSh.History = Backbone.Collection.extend({
     initialize: function() {
+
+      this.commands = new Backbone.Collection();
+
+      this.on("add",this.addToCommands,this);
+    },
+
+    addToCommands: function(model) {
+      if(model instanceof EcmaSh.CommandLine) {
+        this.commands.add(model);
+      }
     },
 
     addResult: function(model) {
@@ -25,6 +35,11 @@
         })
       );
       this.trigger("done");
+    },
+
+    commandAt: function(idx) {
+      console.log([this.commands.length, this.commands ]);
+      return this.commands.at(this.commands.length + idx);
     }
   });
 

@@ -16,10 +16,8 @@ EcmaSh.BaseView = Backbone.View.extend({
     return this;
   },
 
-
-  pressedEnter: function(e) {
-
-    if(e.which == 13 && !e.shiftKey) {
+  pressedKey: function(e,keyCode) {
+    if(e.which == keyCode && !e.shiftKey) {
       e.preventDefault();
       return true;
     } else {
@@ -27,14 +25,11 @@ EcmaSh.BaseView = Backbone.View.extend({
     }
   },
 
-  pressedTab: function(e) {
-    if(e.which == 9 && !e.shiftKey) {
-      e.preventDefault();
-      return true;
-    } else {
-      return false;
-    }
-  },
+
+  pressedEnter: function(e) { return this.pressedKey(e,13); },
+  pressedTab: function(e) { return this.pressedKey(e,9); },
+  pressedUp: function(e) { return this.pressedKey(e,38); },
+  pressedDown: function(e) { return this.pressedKey(e,40); },
 
   focusPrompt: function() {
     var $prompt = this.$el.parents(".shell").find(".prompt");

@@ -12,6 +12,7 @@
 
     initialize: function(attributes,options) {
       this.shell = options.shell;
+      this.set("history",0);
     },
 
     promptLine: function() {
@@ -80,7 +81,22 @@
       }
 
       this.trigger("reposition",pos);
+    },
+
+
+    showHistory: function(num) {
+      this.set("history",this.get("history") + num);
+      var idx = this.get("history");
+      console.log(idx);
+      var command = this.shell.history.commandAt(idx);
+      if(command) {
+        this.set("prompt",command.get("input"));
+        this.trigger("reposition",command.get("input").length);
+      }
     }
+
+
+
   });
 }(EcmaSh));
 
