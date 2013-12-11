@@ -87,15 +87,15 @@
     showHistory: function(num) {
       this.set("history",this.get("history") + num);
       var idx = this.get("history");
-      console.log(idx);
       var command = this.shell.history.commandAt(idx);
       if(command) {
         this.set("prompt",command.get("input"));
         this.trigger("reposition",command.get("input").length);
+      } else {
+        this.set("prompt"," ");
+        this.trigger("reposition",0);
       }
     }
-
-
 
   });
 }(EcmaSh));

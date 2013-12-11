@@ -38,7 +38,6 @@
     },
 
     commandAt: function(idx) {
-      console.log([this.commands.length, this.commands ]);
       return this.commands.at(this.commands.length + idx);
     }
   });

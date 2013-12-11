@@ -88,7 +88,7 @@
         var ResultView = EcmaSh[ _.capitalize(model.get("as")) + "ResultView" ] ||
                          EcmaSh[ _.capitalize(model.get("type")) + "ResultView" ] ||
                          EcmaSh.ResultView;
-        this.addHistoryView(new ResultView({ model: model }));
+        this.addHistoryView(new ResultView({ model: model, shell: this.model }));
       }
 
       this.el.scrollTop = this.el.scrollHeight;

@@ -120,7 +120,6 @@
 
 
     run: function() {
-
       var url = EcmaSh.resolvePath(this.get("argv")[0],this.context.get("CWD")) + "?token=" + this.context.user.get("api_key");
 
       this.set("result", {  path: url });
