@@ -10,6 +10,14 @@ class FileNode < Node
 
   def has_content?; self.file_node_content.present?; end
 
+  def setup
+    super
+    self.build_file_node_content(content: "\n",content_type: self.file_content_type) if self.file_type == "text"
+    self
+  end
+
+
+
   def content
     if self.file_node_content
       self.file_node_content.content
@@ -27,7 +35,7 @@ class FileNode < Node
   end
 
   def content_subtype
-    self.content_type.split("/")[1]
+    self.content_type.present? ? self.content_type.split("/")[1] : "plain"
   end
 
   def image?
@@ -72,11 +80,14 @@ class FileNode < Node
       elsif self.file_type == "text"
         set_text_properties
       end
+    elsif name.present?
+      self.file_content_type = Mime::Type.lookup_by_extension(self.name.split(".")[-1]).to_s
+      set_base_properties
     end
   end
 
   def set_base_properties
-    self.name = self.file_file_name
+    self.name = self.file_file_name if self.file_file_name.present?
     self.file_type = self.file_content_type.split("/")[0]
   end
 

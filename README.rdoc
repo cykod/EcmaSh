@@ -1,7 +1,5 @@
 == README
 
-1. Source command errors
-2. History up / down
 3. Editor below
 4. Create file
 6. Rip out paperclip

@@ -1,4 +1,5 @@
 class FilesController < ApplicationController
+  include ResolvePath
 
   def create
     result = Command.run(current_user_id,
@@ -33,13 +34,25 @@ class FilesController < ApplicationController
   end
 
   def update
-    node = Node.fetch("/home/" + params[:directory].to_s)
+    node_path = "/home/" + params[:directory].to_s
+    node = Node.fetch(node_path)
 
     access = Access.new(current_user_id)
 
-    if access.read?(node) && !node.directory? && node.text?
+    if access.write?(node) && !node.directory? && node.text?
       node.content = params[:content].to_s
-      render nothing: true, status: :accepted
+      return render nothing: true, status: :accepted
+    end
+
+    directory, file_name = resolve_directory_and_file(node_path,"")
+    directory_node = Node.fetch_directory(directory)
+
+    if directory_node && access.write?(directory_node)
+      node = directory_node.empty_file(file_name)
+      return render nothing: true, status: 404 unless node.text?
+      node.content = params[:content].to_s
+      node.save
+      return render nothing: true, status: :accepted
     else
       return render nothing: true, status: 404
     end

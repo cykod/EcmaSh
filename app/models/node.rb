@@ -19,6 +19,17 @@ class Node < ActiveRecord::Base
     where(fullpath: fullpath).first
   end
 
+  def self.fetch_directory(fullpath)
+    DirectoryNode.where(fullpath: fullpath).first
+  end
+
+  def setup
+    set_full_path
+    set_parent_ids
+    set_name_and_properties
+    self
+  end
+
 
   protected
 

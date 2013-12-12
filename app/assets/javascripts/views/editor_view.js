@@ -3,7 +3,7 @@
   EcmaSh.EditorView = EcmaSh.BaseView.extend({
     className: "editor",
     initialize: function() {
-      console.log(this.model.toJSON());
+      //console.log(this.model.toJSON());
     },
 
     render: function() {

@@ -53,7 +53,7 @@ describe FilesController do
   end
 
   describe "#put" do
-    let(:directory) { create :directory_node, name: "tester", user: user, parent: DirectoryNode.home_node }
+    let!(:directory) { create :directory_node, name: "tester", user: user, parent: DirectoryNode.home_node }
 
     let(:image_file) { FileNode.create(file: fixture_file_upload("images/rails.png","image/png"), parent: directory) }
     let(:text_file) { FileNode.create(file: fixture_file_upload("text/sample_file.txt", "text/plain"), parent: directory ) }
@@ -74,6 +74,12 @@ describe FilesController do
       put :update, directory: "tester/sample_file.txt", content: "Here's the content"
       response.status.should == 202
       text_file.reload.content.should == "Here's the content"
+    end
+
+    it "creates a file if it's a valid text extension" do
+      put :update, directory: "tester/sample2.txt", content: "New Content"
+      response.status.should == 202
+      FileNode.fetch("/home/tester/sample2.txt").content.should == "New Content"
     end
 
   end

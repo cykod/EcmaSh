@@ -59,4 +59,6 @@ describe DirectoryNode do
 
   end
 
+  describe "#empty_file"
+
 end

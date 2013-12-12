@@ -32,6 +32,11 @@ class DirectoryNode < Node
     node
   end
 
+  # Create a new empty file
+  def empty_file(file_name)
+    FileNode.new(parent: self, user: user, name: file_name).setup
+  end
+
 
 
   def download(url)

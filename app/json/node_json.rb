@@ -20,7 +20,7 @@ class NodeJSON < JSONBase
       json.fullpath node.fullpath
       json.name node.name
       json.directory node.directory?
-      json.src node.file(:original)
+      json.src node.file(:original) if !node.text?
       json.file_type node.file_type
       json.file_subtype node.content_subtype
       json.image node.image?

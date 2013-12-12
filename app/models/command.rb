@@ -2,6 +2,8 @@ class Command < ActiveRecord::Base
   attr_reader :output
   attr_accessor :context
 
+  include ResolvePath
+
   belongs_to :user
 
   scope :successful, -> { where(successful: true) }
@@ -53,50 +55,15 @@ class Command < ActiveRecord::Base
 
 
   def resolve_path(path)
-    join_path resolve_path_parts(path)
+    super(path,context['CWD'])
   end
 
   def resolve_directory_and_file(path)
-    parts = resolve_path_parts(path)
-    if path[-1] == "/"
-      return join_path(parts),""
-    else
-      return join_path(parts[0..-2]),parts[-1]
-    end
+    super(path,context['CWD'])
   end
 
-  def join_path(path_parts)
-    "/" + path_parts.join("/")
-  end
-
-  def resolve_path_parts(path)
-    path_parts =  generate_path_parts(path)
-    resolve_relative_path_parts(path_parts)
-  end
-
-
-  private
-
-  def generate_path_parts(path)
-    if path[0] == "/"
-      path.to_s.split("/").reject(&:blank?)
-    else
-      (context["CWD"].to_s.split("/") + path.to_s.split("/")).reject(&:blank?)
-    end
-  end
-
-  def resolve_relative_path_parts(path_parts)
-    idx = 0
-    final_path_parts = []
-    while idx < path_parts.length
-      if path_parts[idx] == ".."
-        final_path_parts.pop
-      elsif path_parts[idx] != "."
-        final_path_parts << path_parts[idx]
-      end
-      idx += 1
-    end
-    final_path_parts
+  def resolve_path_parts(path,cwd=nil)
+    super(path,cwd || context['CWD'])
   end
 
 end
