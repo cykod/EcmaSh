@@ -1,7 +1,5 @@
 == README
 
-3. Editor below
-4. Create file
 6. Rip out paperclip
 7. Run command (esh files) (split by line)
 
@@ -9,11 +7,6 @@ Editor:
 =======
 
 normal mode - save and quit
-track dirty?
-theme
-syntax highlighting
-should be able to create a new file.
-
 
 ToDo:
 =====
@@ -26,7 +19,6 @@ set ENV variables
 parsing options (-r)
 multiple argumentsf
 3. Figure out hosting / directory structure - .domain file
-5. up / down for history
 8. public / private directories
 9. Add bing search api + JSON awk-type extractor
 10. Deploy to digital ocean

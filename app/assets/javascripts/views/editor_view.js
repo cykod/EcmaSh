@@ -27,12 +27,15 @@
         self.remove();
       });
 
+      var editorMode = this.calculateMode(this.model.get("file_subtype"));
+
       var options = {
         value: this.model.get("content"),
         lineWrapping: true,
         lineNumbers: true,
         autoFocus: true,
-        mode:  this.model.get("file_subtype")
+        mode:  editorMode,
+        theme: "base16-dark"
       }
 
       if(editor == "vi" || editor == "vim") {
@@ -44,6 +47,15 @@
       setTimeout(function() {
         self.editor.focus();
       },10);
+    },
+
+    modes: {
+      "x-markdown": "markdown",
+      "html": "htmlmixed"
+    },
+
+    calculateMode: function(name) {
+      return this.modes[name] || name;
     }
   });
 

@@ -1,7 +1,6 @@
 (function(EcmaSh) {
 
  EcmaSh.SourceResultView = EcmaSh.BaseView.extend({
-   template: "result-source",
     initialize: function(options) {
       this.shell = options.shell;
     },

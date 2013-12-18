@@ -16,8 +16,6 @@ class FileNode < Node
     self
   end
 
-
-
   def content
     if self.file_node_content
       self.file_node_content.content
@@ -67,6 +65,15 @@ class FileNode < Node
     node.save && node
   end
 
+  @@type_overrides = {
+    "md" => "text/x-markdown"
+  }
+
+  def type_for_name(name)
+    extension = name.split(".")[-1].to_s.downcase
+    @@type_overrides[extension] || 
+      Mime::Type.lookup_by_extension(extension).to_s
+  end
 
 
   protected
@@ -81,7 +88,7 @@ class FileNode < Node
         set_text_properties
       end
     elsif name.present?
-      self.file_content_type = Mime::Type.lookup_by_extension(self.name.split(".")[-1]).to_s
+      self.file_content_type = type_for_name(self.name)
       set_base_properties
     end
   end
@@ -99,6 +106,7 @@ class FileNode < Node
 
   def set_text_properties
     txt = File.open(file.queued_for_write[:original].path).read
+    self.file_content_type = type_for_name(self.name)
     content = self.build_file_node_content(
       content: txt,
       content_type: self.file_content_type

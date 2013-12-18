@@ -23,6 +23,7 @@
 
     runCommand: function() {
       var self = this;
+      this.set("history",0);
       var commandLine = this.get("prompt").trim();
       this.shell.runLine(this.promptLine(),commandLine);
     },

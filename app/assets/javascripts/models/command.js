@@ -1,7 +1,7 @@
 ;(function(EcmaSh) {
 
   EcmaSh.commands = {};
-  EcmaSh.aliases = { cat: "show", vi: "edit", more: "show", less: "show", exit: 'logout', move: 'mv', copy: 'cp' };
+  EcmaSh.aliases = { cat: "show", vi: "edit", more: "show", less: "show", exit: 'logout', move: 'mv', copy: 'cp', open: 'run' };
 
   EcmaSh.Command = Backbone.Model.extend({
 
@@ -129,10 +129,27 @@
   });
 
 
+  EcmaSh.RunCommand = EcmaSh.Command.extend({
+    initialize: function(attributes,options) {
+      EcmaSh.Command.prototype.initialize.call(this,attributes,options);
+    },
+
+
+    run: function() {
+      var url = EcmaSh.resolvePath(this.get("argv")[0],this.context.get("CWD")) + "?token=" + this.context.user.get("api_key");
+
+      this.set("result", {  path: url });
+      this.done();
+    }
+
+  });
+
+
   EcmaSh.commands['logout'] = EcmaSh.LogoutCommand;
   EcmaSh.commands['cd'] = EcmaSh.CdCommand;
   EcmaSh.commands['upload'] = EcmaSh.UploadCommand;
   EcmaSh.commands['source'] = EcmaSh.SourceCommand;
+  EcmaSh.commands['run'] = EcmaSh.RunCommand;
 
   
 }(EcmaSh));

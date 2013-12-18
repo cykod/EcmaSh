@@ -15,7 +15,6 @@ class Command::Edit < ::Command
       raise InvalidFileError.new(argv[0]) unless node.text?
     end
 
-
     output!(NodeJSON.new(node).details_hash)
   end
 end
