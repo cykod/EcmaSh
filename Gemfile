@@ -32,7 +32,10 @@ group :doc do
 end
 
 group :development, :test do
+  gem "sshkit", "~> 1.2.0"
   gem "capistrano"
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
   gem "rspec"
   gem "rspec-rails"
   gem "factory_girl_rails", "~> 4.0"

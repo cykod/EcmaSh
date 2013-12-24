@@ -1,0 +1,4 @@
+set :stage, :production
+
+server 'PRODUCTION HOSTNAME', user: 'ecmash', roles: %w{web app db}
+
