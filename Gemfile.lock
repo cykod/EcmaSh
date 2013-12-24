@@ -59,6 +59,9 @@ GEM
       sprockets (>= 2.0.3)
       tilt
     hike (1.2.3)
+    httparty (0.12.0)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.5)
     jbuilder (1.5.2)
       activesupport (>= 3.0.0)
@@ -71,6 +74,7 @@ GEM
     mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.2)
+    multi_xml (0.5.5)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
@@ -176,6 +180,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   fakeweb
   handlebars_assets
+  httparty
   jbuilder (~> 1.2)
   paperclip
   pg

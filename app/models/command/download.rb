@@ -1,4 +1,4 @@
-class Command::Fetch < ::Command
+class Command::Download < ::Command
   def run
     node_path = resolve_path(".")
     directory = Node.fetch(node_path)

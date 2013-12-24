@@ -14,6 +14,7 @@ gem "handlebars_assets"
 gem 'jbuilder', '~> 1.2'
 gem "rack-zippy"
 gem 'bcrypt-ruby'
+gem 'httparty'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
