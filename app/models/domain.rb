@@ -4,11 +4,8 @@ class Domain < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
-  @@base_domains = if ENV['ECMASH_DOMAINS']
-                     ENV['ECMASH_DOMAINS'].split(",").map(&:strip)
-                   else
-                     [ 'www.ecmash.com', 'localhost' ]
-                   end
+  @@base_domains =  ENV['ECMASH_DOMAINS'].split(",").map(&:strip) if ENV['ECMASH_DOMAINS']
+  @@base_domains ||= [ 'www.ecmash.com', 'localhost' ]
 
   @@base_domains += [ 'test.com' ] if Rails.env.test?
 

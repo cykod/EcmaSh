@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :commands, dependent: :delete_all
   has_many :user_keys, dependent: :delete_all
   has_many :nodes, dependent: :destroy
+  has_many :domains
 
   def self.login(username,password)
     return false if username.blank?

@@ -1,10 +1,12 @@
 class ProcessStatic
+  unloadable
+
   def initialize(app)
     @app = app
   end
 
   def call(env)
-    host = env['HTTP_HOST'].split(":").first
+    host = env['SERVER_NAME']
 
     if Domain.base_domain?(host)
       return @app.call(env)
