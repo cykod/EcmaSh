@@ -46,5 +46,6 @@ module EcmaSh
 
     config.middleware.swap(ActionDispatch::Static, Rack::Zippy::AssetServer)
 
+    config.middleware.use "ProcessStatic"
   end
 end

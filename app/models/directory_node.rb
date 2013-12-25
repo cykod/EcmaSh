@@ -2,6 +2,8 @@ class DirectoryNode < Node
 
   has_many :children, -> {  order("nodes.type != 'DirectoryNode', nodes.name") }, class_name: "Node", foreign_key: "parent_id", dependent: :destroy
 
+  has_many :domains, dependent: :destroy
+
   after_save  :update_children_path
 
   validates :name, format: { with:  /\A[a-zA-Z\-._0-9]+\z/ }, uniqueness: { scope:  :parent_id }

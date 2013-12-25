@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131122140313) do
+ActiveRecord::Schema.define(version: 20131224190239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 20131122140313) do
     t.datetime "updated_at"
     t.string   "opts",       array: true
   end
+
+  create_table "domains", force: true do |t|
+    t.string  "name"
+    t.integer "directory_node_id"
+    t.integer "user_id"
+  end
+
+  add_index "domains", ["directory_node_id"], name: "index_domains_on_directory_node_id", using: :btree
+  add_index "domains", ["name"], name: "index_domains_on_name", using: :btree
 
   create_table "file_node_contents", force: true do |t|
     t.text     "content"

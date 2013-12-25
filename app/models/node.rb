@@ -6,6 +6,8 @@ class Node < ActiveRecord::Base
   before_save :set_full_path
   before_save :set_parent_ids
 
+
+
   scope :directories, -> { where("type = 'DirectoryNode'") }
 
   def directory?; false; end

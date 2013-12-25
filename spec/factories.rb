@@ -31,5 +31,12 @@ FactoryGirl.define do
     association(:file_node_content) { |fn| build(:file_node_content) if fn.file_type == "text" }
   end
 
+
+  sequence(:domain_name) { |n| "domain#{n}.com" }
+
+  factory :domain do 
+    name { generate(:domain_name) }
+    directory_node { build(:directory_node) }
+  end
 end
 
