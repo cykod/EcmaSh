@@ -65,8 +65,15 @@ class FileNode < Node
     node.save && node
   end
 
+  @@mime_overrides = {
+    "application/json" => "text",
+    "application/xml" => "text",
+    "application/javascript" => "text"
+  }
+
   @@type_overrides = {
-    "md" => "text/x-markdown"
+    "md" => "text/x-markdown",
+    "tmx" => "text/xml"
   }
 
   def self.type_for_name(name)
@@ -94,12 +101,14 @@ class FileNode < Node
     end
   end
 
+
+
   def set_base_properties
     self.name = self.file_file_name if self.file_file_name.present?
 
-    if self.file_content_type == "application/json"
-      self.file_type = "text"
-    else
+    if @@mime_overrides[self.file_content_type]
+      self.file_type =  @@mime_overrides[self.file_content_type]
+    else 
       self.file_type = self.file_content_type.split("/")[0]
     end
   end
