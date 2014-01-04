@@ -42,6 +42,23 @@ describe FileNode do
     end
   end
 
+  context "json file" do
+    let(:json_file) { FileNode.create(file: fixture_file_upload("text/sample.json", "application/json")) }
+
+    it "should have content" do
+      json_file.should have_content
+    end
+
+    it "should be a text file" do
+      json_file.should be_text
+    end
+
+    it "sets the content content type" do
+      json_file.content_type.should == "application/json"
+    end
+
+  end
+
   context "text file" do
     let(:text_file) { FileNode.create(file: fixture_file_upload("text/sample_file.txt", "text/plain")) }
 

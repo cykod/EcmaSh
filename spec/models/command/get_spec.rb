@@ -8,6 +8,22 @@ describe Command::Get do
     Command.run(user,:get,{  },[ arg ])
   end
 
+  it "raises an error with a 404" do
+    FakeWeb.register_uri(:get, "http://www.google.com/", status: 404)
+
+    result = run_get_command("http://www.google.com")
+    result.should be_instance_of InvalidURLError
+    result.to_s.should include("404")
+  end
+
+  it "raises an error with a 500" do
+    FakeWeb.register_uri(:get, "http://www.google.com/", status: 500)
+
+    result = run_get_command("http://www.google.com")
+    result.should be_instance_of InvalidURLError
+    result.to_s.should include("500")
+  end
+
   it "returns websites in the content attribute" do
     FakeWeb.register_uri(:get, "http://www.google.com/", body: "<h1>Yay!</h1>", content_type: "text/html")
 

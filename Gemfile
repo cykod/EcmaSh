@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby "2.0.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.1'
+gem 'rails', '4.1.0.beta1', github: 'rails/rails'
 
 gem 'pg'
 gem 'aws-sdk'
@@ -41,6 +41,8 @@ group :development, :test do
   gem "simplecov"
   gem "fakeweb"
 end
+
+gem "spring", group: :development
 
 gem 'rails_12factor', group: :production
 

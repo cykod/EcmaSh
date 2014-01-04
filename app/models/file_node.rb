@@ -96,7 +96,12 @@ class FileNode < Node
 
   def set_base_properties
     self.name = self.file_file_name if self.file_file_name.present?
-    self.file_type = self.file_content_type.split("/")[0]
+
+    if self.file_content_type == "application/json"
+      self.file_type = "text"
+    else
+      self.file_type = self.file_content_type.split("/")[0]
+    end
   end
 
   def set_image_properties

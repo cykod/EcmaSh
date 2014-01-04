@@ -1,7 +1,115 @@
-== README
+
+
+The fun stuff:
+
+== Hosting Story:
+
+Store file prefix - everything before last .md for content nodes
+if there is a processor that can process the extension 
+tester.md -> tester
+tester.js.sjs ->  tester.js
+tester.html.haml -> tester.html
+
+index.md -> index
+index.html.md -> index.html
+
+<!-- markdown  -->
+
+
+index.json -> return list of files in that directory
+
+index.md -> index -> autoindex file
+
+style.css.scss
+index.html
+file.
+
+== preprocess:
+
+File Nodes: cannont be updated
+ContentNode: turn file node into contentnode?
+
+html: relative urls turn into cloudfront urls -> name_timestamp.jpg
+
+delete old file, replace with new file
+
+gsub - replace urls with cloudfront version
+
+redis - multi fetch of cache keys of all the files
+
+file nodes: on create
+
+
+Eventually:
+pre-process: split each file into "parts" - lookup all the parts in redis, stitch together and output.
+
+Now:
+gsub - each url gets fetched from redis / activerecord
+
+== Paperclip rip out:
+
+write files to S3 in directory pattern that matches 
+
+
+== .data/.db  files? 
+
+createdb mydb
+mydb.db
+
+read / write
+/db/mydb - 
+post /db/mydb { 
+get /db/mydb/34156431263262346623163
+/db/mydb/56264239064837285934597
+
+== Forked node JS server running client side code w/o views
+
+Run commands / do stuff  / insert into db (but with a valid key)
+
+== pre-processing via .ejs files
+
+index.html.ejs -> index.html (but ejs run on the fly)
+
+== esh files
+
+run client or server side
+
+maybe use backtick to escape to straight JS code
+
+get http://tester.com/something.json | `if($0.sunny) { return { ok: "weather" } }` > weather.json
+
+need tokenizer - backticks get single token
+
+
+add rendering support
+
+
+== Blueprints
+
+$ blueprint quintus-platformer platformer
+- use a blueprint
+
+$ blueprint-register quintus-platformer ./quintus-platformer
+- register a blueprint
+
+$ blueprint-update quintus-platformer ./quintus-platformer
+- update a new version
+
+
+== Multi-user editing
+
+only let one user edit at a time - but let multiple users see the edits in realtime 
+
+== Su support
+
+login as another user w/ their password - work on group projects by sharing a user
+
+== To Do 
 
 6. Rip out paperclip
-7. Run command (esh files) (split by line)
+
+
+
 
 Editor:
 =======
