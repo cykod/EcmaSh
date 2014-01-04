@@ -106,6 +106,10 @@ class FileNode < Node
   def set_base_properties
     self.name = self.file_file_name if self.file_file_name.present?
 
+    if self.file_content_type = "application/octet/stream"
+      self.file_content_type = FileNode.type_for_name(self.name)
+    end
+
     if @@mime_overrides[self.file_content_type]
       self.file_type =  @@mime_overrides[self.file_content_type]
     else 
